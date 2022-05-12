@@ -50,7 +50,7 @@
         var index = 0;
         var texts = ["Coming soon", "Coming soon.", "Coming soon..", "Coming soon..."]
 
-        console.log("test");
+        console.log("coff-it");
         window.setInterval(function(){
             index++
             if(index > texts.length - 1) {
