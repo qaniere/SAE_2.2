@@ -50,7 +50,7 @@
         var index = 0;
         var texts = ["Coming soon", "Coming soon.", "Coming soon..", "Coming soon..."]
 
-
+        console.log("test");
         window.setInterval(function(){
             index++
             if(index > texts.length - 1) {
