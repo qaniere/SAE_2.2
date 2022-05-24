@@ -3,10 +3,10 @@
     //Activer la ligne en dessous quand la connexion sera implémentée
     //$id = $_SESSION["id"];
     $id = 1;
-    include "../login_db.php";
+    include_once("../db_connection.php");
 
     //Pour récupérer le login et la cagnotte 
-    $stmt = $db -> prepare("SELECT stash,login FROM Customer WHERE id = ?");
+    $stmt = $db -> prepare("SELECT stash, login FROM Customer WHERE id = ?");
     $stmt -> bind_param("i",$id);
     $stmt -> execute();
 
