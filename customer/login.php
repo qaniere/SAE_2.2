@@ -4,45 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Connection</title>
 </head>
 <body>
-    <?php
-        include "../login_db.php";
-        session_start();
-    ?>
     <form action="login.php" method="post">
-        <input type="text" name="login" id="log" placeholder="login ou e-mail">
-        <input type="password" name="passwd" id="pwd" placeholder="mot de passe">
-        <button type="submit"> Connection </button>
+        <input type="text" name="login" id="login" placeholder="Votre login ou votre adresse email">
+        <input type="password" name="password" id="password" placeholder="Mot de passe">
+        <button type="submit">Connection</button>
     </form>
-
     <?php
-        $login = $_POST['login'];
-        $pwd = $_POST['passwd'];
+        session_start(); //Allow to use $_SESSION var
 
-        $stmt = $db -> prepare("SELECT * FROM CustomerLogin WHERE login='$login'");
-        $stmt -> execute();
-        $logExist = $stmt -> store_result();
-        
-        $stmt = $db -> prepare("SELECT * FROM CustomerLogin WHERE email='$login'");
-        $stmt -> execute();
-        $mailExist = $stmt -> store_result();
+        if(isset($_POST["login"]) && isset($_POST["password"])) {
+        //If form is completed
 
-        $stmt = $db -> prepare("SELECT pwd_hash FROM CustomerLogin WHERE login='$login' OR email='$login'");
-        $stmt -> execute();
-        $pwdres = $stmt -> get_result();
-        $pwd_hash = $pwdres -> fetch_assoc();
+            extract($_POST);    
+            include_once("../db_connection.php");
 
-        if ($logExist || $mailExist) {
-            if (password_verify($pwd ,$pwd_hash['pwd_hash'])) {
-                $_SERVER['user'] = $login;
-                echo "connection réussie";
+            $stmt = $db->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE Customer.login = ? OR CustomerProtectedData.email = ?");
+            $stmt ->bind_param("ss", $login, $login);
+            $stmt ->execute();
+
+            $result = $stmt ->get_result() ->fetch_assoc(); //Get the SQL data as an array 
+            
+            if($result == NULL) {
+                echo "Impossible de trouver à compte associé à '$login'";
+
+            } else {
+                
+                if(password_verify($password, $result["password_hash"])) {
+                    foreach ($result as $key => $value) {
+                        $_SESSION[$key] = $value;
+                    }
+
+                    echo "Connexion réussie. Vous pouvez vous rendre sur <a href='account.php'>account.php</a>";
+
+                } else {
+                    echo "Mot de passe incorrect !";
+                }
             }
+            
         }
-
-
-
     ?>
 </body>
 </html>
