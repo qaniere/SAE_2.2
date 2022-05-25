@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
+    <link href="../style/basic.css" rel="stylesheet">
 </head>
 <body>
     <form action="signup.php" method="post">
+        <h1>Inscription</h1>
         <input type="text" name="login" id="login" placeholder="Login" required>
         <br> <br>
         <input type="email" name="mail" id="mail" placeholder="e-mail" required>
