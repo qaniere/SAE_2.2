@@ -91,6 +91,7 @@ INSERT INTO `BusinessSell` (`business`, `typeItem`, `quantity`, `price`) VALUES
 CREATE TABLE `Customer` (
   `id` bigint(20) NOT NULL,
   `login` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stash` smallint(6) NOT NULL COMMENT 'no more than 65000 euros'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -123,20 +124,6 @@ INSERT INTO `CustomerExtraction` (`Customer`, `element`, `quantity`) VALUES
 (1, 79, 340);
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `CustomerLogin`
---
-
-CREATE TABLE `CustomerLogin` (
-  `id` int(11) NOT NULL,
-  `login` varchar(20) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  `password_hash` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `CustomerProtectedData`
 --
@@ -291,12 +278,6 @@ ALTER TABLE `Customer`
 ALTER TABLE `CustomerExtraction`
   ADD KEY `Customer` (`Customer`),
   ADD KEY `element` (`element`);
-
---
--- Indexes for table `CustomerLogin`
---
-ALTER TABLE `CustomerLogin`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `CustomerProtectedData`

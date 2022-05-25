@@ -28,4 +28,6 @@
         echo "Échec : $e";
         die();
     }
+
+    $db ->set_charset("utf8mb4");
 ?>
