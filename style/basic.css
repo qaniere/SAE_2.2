@@ -1,0 +1,17 @@
+body {
+    width: 99%;
+    height: 100%;
+    
+    font-family: Helvetica;
+
+    background-color: #08bc94;
+}
+
+input[type ="text"], input[type ="email"], input[type ="password"] {
+    padding: 5px;
+    border: 2px solid black;
+}
+
+button {
+    padding: 5px;
+}
