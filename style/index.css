@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #08bc94;
+}
+
+
+#user-logo {
+    height: 5vh;
+    margin-right: 1vw;
+}
+
+#account-pill {
+    right: 0;
+    position: absolute;
+    align-self: flex-start;
+
+    width: 16vw;
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    background-color: #045e49;
+}
+
+#logo-container {
+    height: 100vh;
+    width: 99vw;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content : center;
+}
+
+#logo-shadow {
+    height: 27em;
+    width: 27em;
+
+    padding: 3%;
+    border-radius: 50%;
+
+    background-color: #045e49;
+}
+
+#logo {
+    height: 27em;
+    width: 27em;
+}
+
+#arrow-container {
+    height: 20vh;
+    width: 100vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#round {
+    height: 14vh;
+    width: 14vh;
+    border-radius: 50%;
+    background-color: #73ab74;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: height 0.25s, width 0.25s;
+}
+
+#round:hover {
+    height: 16vh;
+    width: 16vh;
+}
+
+#round:active {
+    height: 10vh;
+    width: 10vh;
+}
+
+#arrow {
+    height: 10vh;
+    animation: jumping 0.5s infinite alternate;
+}
+
+
+@keyframes jumping {
+    from {transform: translateY(0);}
+    to {transform: translateY(1vh) }
+}
