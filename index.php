@@ -23,42 +23,59 @@
         </div> 
         <div id="arrow-container">
             <div id="round">
-                <a href="#start"><img id="arrow" src="./img/arrow.png" alt="Une flèche qui sert à descendre dans la page"></a>
+                <a href="#content">
+                    <img id="arrow" src="./img/arrow.png" alt="Une flèche qui sert à descendre dans la page">
+                </a>
             </div>
         </div>
     </div>
-    <div id="start">
-        <h2>Qui sommes nous ? </h2>
-        <p>
-            Lyft hell of humblebrag organic shaman authentic, 
-            selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-            Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-            gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-            four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-            book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-            kinfolk slow-carb migas cold-pressed ennui.
-        </p>
-        <h2>Des offres pour les particuliers mais aussi pour les entreprises !</h2>
-        <p>
-            <h3>Vous êtes un particulier :</h3>
-            Lyft hell of humblebrag organic shaman authentic, 
-            selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-            Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-            gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-            four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-            book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-            kinfolk slow-carb migas cold-pressed ennui.
-        </p>
-        <p>
-            <h3>Vous êtes une entreprise :</h3>
-            Lyft hell of humblebrag organic shaman authentic, 
-            selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-            Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-            gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-            four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-            book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-            kinfolk slow-carb migas cold-pressed ennui.
-        </p>
+    <div id="content">
+        <div id="presentation-block">
+            <h2>Qui sommes nous ?</h2>
+            <p>
+                Lyft hell of humblebrag organic shaman authentic, 
+                selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
+                Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
+                gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
+                four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
+                book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
+                kinfolk slow-carb migas cold-pressed ennui.
+            </p>
+            <button>Voir notre catalogue</button>
+        </div>
+        <h3>Des offres pour les particuliers mais aussi pour les entreprises !</h3>
+        <div id="customer-block-container">
+            <div class="customer-block">
+                <p>
+                    <h3>Vous êtes un particulier</h3>
+                    Lyft hell of humblebrag organic shaman authentic, 
+                    selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
+                    Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
+                    gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
+                    four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
+                    book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
+                    kinfolk slow-carb migas cold-pressed ennui.
+                    <br>
+                    <button>S'inscrire</button>
+                    <button>Se connecter</button>
+                </p>
+            </div>
+            <div class="customer-block">
+                <p>
+                    <h3>Vous êtes une entreprise</h3>
+                    Lyft hell of humblebrag organic shaman authentic, 
+                    selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
+                    Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
+                    gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
+                    four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
+                    book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
+                    kinfolk slow-carb migas cold-pressed ennui.
+                    <br>
+                    <button>S'inscrire</button>
+                    <button>Se connecter</button>
+                </p>
+            </div>
+        </div>       
     </div>
 </body>
 </html>
