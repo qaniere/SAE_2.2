@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +19,15 @@
     <div id="logo-container">
         <div id="account-pill">
             <img id="user-logo" src="./img/user.png">
-            <p>Vous n'êtes pas connecté</p>
+            <?php
+                if(isset($_SESSION["id"])) {
+                    $name = $_SESSION["firstname"];
+                    echo "<a href='./customer/account.php'>Bonjour $name !</a>";
+
+                } else {
+                    echo "<a href='./customer/login.php'>Vous n'êtes pas connecté</a>";
+                }
+            ?>
         </div>
         <div id="logo-shadow">
             <img id="logo" src="./img/logo.png" alt="Le logo de l'entreprise qui représente un ordinateur posé sur des feuilles">
@@ -56,8 +67,8 @@
                     book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
-                    <button>S'inscrire</button>
-                    <button>Se connecter</button>
+                    <a href="./customer/signup.php"><button>S'inscrire</button></a>
+                    <a href="./customer/login.php"><button>Se connecter</button></a>
                 </p>
             </div>
             <div class="customer-block">
