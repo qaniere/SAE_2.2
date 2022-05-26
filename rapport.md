@@ -15,4 +15,4 @@ DB_PASSWORD=
 DB_NAME=coff_it
 ```
 
-Une fois ce fichier lu par PHP, on peut la variable "$DB_URL" qui vaut "localhost"
+Une fois ce fichier lu par PHP, on peut utiliser la variable "$DB_URL" qui vaut "localhost"
