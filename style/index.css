@@ -152,3 +152,39 @@ a:hover {
     from {transform: translateY(0);}
     to {transform: translateY(1vh) }
 }
+
+
+@media screen and (max-width: 1024px) {
+
+    h3 {
+        text-align: center;
+    }
+
+
+    #logo-shadow { 
+        height: 20em;
+        width: 20em;
+        margin-top: 10vh;
+    }
+
+    #logo {
+        height: 20em;
+        width: 20em;
+    }
+
+    #account-pill {
+        margin: 0.5em;
+        width: 60vw;
+    }
+
+    #customer-block-container {
+        flex-wrap: wrap
+    }
+
+
+    .customer-block {
+        width: 80vw;
+        margin-bottom: 5vh;
+    }
+
+}
