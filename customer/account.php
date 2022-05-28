@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +12,7 @@
 </head>
 <body>
     <h1>Votre compte</h1>
-    <?php
-        session_start();
-        
+    <?php        
         if(isset($_SESSION["id"])) {
 
             include_once("../db_connection.php");

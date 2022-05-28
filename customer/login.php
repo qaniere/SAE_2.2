@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +20,6 @@
         <button type="submit">Connexion</button>
     </form>
     <?php
-        session_start(); //Allow to use $_SESSION var
-
         if(isset($_POST["login"]) && isset($_POST["password"])) {
         //If form is completed
 
