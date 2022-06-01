@@ -11,7 +11,7 @@
     
     
     
-    <form action="./buy/itemDisplay.php" method="GET">
+    <form action="./item_display.php" method="GET">
     <h1>Catalogue de nos articles</h1>
     <div class="container">
         <?php
@@ -36,7 +36,7 @@
                 $item = $row["name"];
                 echo '<div class="article">';
                 echo "<div class='item'><h3>$item</h3></div>";
-                echo '<div class="item"><img src="./img/' . $i . '.jpg" width="300"></div>';
+                echo '<div class="item"><img src="../uploaded_files/' . $i . '.jpg" width="300"></div>';
                 echo '<div class="item"><button value="' . $i . '" name="item" type="submit" class="button">Voir</button></div>';
                 echo '</div>';
             }
