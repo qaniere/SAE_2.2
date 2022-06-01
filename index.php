@@ -52,7 +52,7 @@
                 book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
                 kinfolk slow-carb migas cold-pressed ennui.
             </p>
-            <button>Voir notre catalogue</button>
+            <a href="./common/catalog.php"><button>Voir notre catalogue</button></a>
         </div>
         <h3>Des offres pour les particuliers mais aussi pour les entreprises !</h3>
         <div id="customer-block-container">
