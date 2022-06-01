@@ -6,13 +6,13 @@
         die("Aucun article séléctionné.");
     }
 
-    include "../../db_connection.php";
+    include "../db_connection.php";
 
     //vérifie si l'article demandé existe
     $exists = $db->query("SELECT typeItem FROM BusinessSell WHERE typeItem = $id");
     $row = $exists->fetch_assoc();
     if (!isset($row["typeItem"])) {
-        die("Cet article n'existe pas.");
+        die("Cet article n'est pas en vente actuellement.<br><a href='../catalog.php'>Retourner au catalogue</a>");
     }
 
     //Récupère le nom de l'objet, les entreprises qui le vendent, et à quel prix et les affiche
@@ -41,6 +41,9 @@
         $price = $row["price"];
         echo "$quantity articles proposés par $business à $price €<br><br>";
     }
+
+    //photo de l'article
+    echo "<img src='../uploaded_files/" . $id . ".jpg' height='400'><br>";
     
     //affiche chaque attribut avec sa valeur
     $stmt = $db -> prepare("SELECT attribute,value FROM TypeItemDetails WHERE typeItem = ?");
