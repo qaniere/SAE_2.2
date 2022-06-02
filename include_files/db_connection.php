@@ -1,6 +1,6 @@
 <?php 
 
-    $file = fopen(stream_resolve_include_path(".env"), "r"); 
+    $file = fopen(stream_resolve_include_path("../.env"), "r"); 
     //stream_resolve_include_path find the good path for .env file
 
     if($file == false) { 

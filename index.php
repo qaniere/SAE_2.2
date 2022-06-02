@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="./style/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="logo-container">
+    <div id="header-container">
         <div id="account-pill">
             <img id="user-logo" src="./img/user.png">
             <?php
@@ -51,8 +50,11 @@
                 four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
                 book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
                 kinfolk slow-carb migas cold-pressed ennui.
+                <br>          
+                <div class="button-container">
+                    <a href="./common/catalog.php"><button>Voir notre catalogue</button></a>
+                </div>
             </p>
-            <a href="./common/catalog.php"><button>Voir notre catalogue</button></a>
         </div>
         <h3>Des offres pour les particuliers mais aussi pour les entreprises !</h3>
         <div id="customer-block-container">
@@ -67,8 +69,10 @@
                     book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
-                    <a href="./customer/signup.php"><button>S'inscrire</button></a>
-                    <a href="./customer/login.php"><button>Se connecter</button></a>
+                    <div class="button-container">
+                        <a href="./customer/signup.php"><button>S'inscrire</button></a>
+                        <a href="./customer/login.php"><button>Se connecter</button></a>
+                    </div>      
                 </p>
             </div>
             <div class="customer-block">
@@ -82,8 +86,10 @@
                     book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
-                    <button>S'inscrire</button>
-                    <button>Se connecter</button>
+                    <div class="button-container">
+                        <button>S'inscrire</button>
+                        <button>Se connecter</button>
+                    </div> 
                 </p>
             </div>
         </div>       

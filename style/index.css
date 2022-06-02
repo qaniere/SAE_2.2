@@ -23,15 +23,33 @@ h3 {
 }
 
 button {
-    background-color: white;
-    font-size: 16px;
+    border: 1px solid black;
+    margin: 10px;
+
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    font-size: 15px;
     font-weight: bold;
-    color: rgb(73, 73, 73);
-    padding-right: 5px;
-    padding-left: 5px;
-    border-radius: 8px;
-    margin: 5px;
-    border: solid white 2px;
+    border-radius: 20px;
+    background-color: #bdc3c7;  
+    
+    transition: 0.15s;
+}
+
+button:hover {
+    padding-top: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 15px;
+}
+
+button:active {
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
 }
 
 a {
@@ -50,12 +68,12 @@ a:hover {
 }
 
 #account-pill {
-    right: 0;
+    top: 1em;
+    right: 1.5em;
     position: absolute;
     align-self: flex-start;
 
     width: 16vw;
-    margin: 1em;
     padding: 0.5em;
     border-radius: 15px;
 
@@ -66,16 +84,22 @@ a:hover {
     background-color: #7cb17d;
 }
 
-#logo-container {
+#header-container {
     height: 100vh;
     width: 99vw;
+    margin-bottom: 4em;
 
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content : center;
-    background-image: url("../img/header_banner.jpg");
+
     background-position: center;
+    background-clip: padding-box;
+    background-image: url("../img/header_banner.jpg");
+    
+    border-bottom: 3.5px solid black;
+    box-shadow: 0 5px 2px -2px gray;
 }
 
 #logo-shadow {
@@ -139,11 +163,16 @@ a:hover {
 #presentation-block {
     width: 80vw;
     padding: 1em;
+    padding-bottom: 3.5em;
     margin-bottom: 5vh;
     border-radius: 2px;
     box-shadow: 3px 3px 2px rgb(198, 195, 190);
 
     background-color: #7cb17d;
+}
+
+#presentation-block > p {
+    margin-bottom: 0;
 }
 
 #customer-block-container {
@@ -161,12 +190,21 @@ a:hover {
     padding-right: 1em;
     padding-left: 1em;
     border-radius: 2px;
+    padding-bottom: 3.5em;
     box-shadow: 3px 3px 2px rgb(198, 195, 190);
     background-color: #7cb17d;
 }
 
 .customer-block > button {
     margin-top: 2vh;
+}
+
+.button-container {
+    margin-top: 5px;
+    position: absolute;
+
+    display: flex;
+    justify-content: flex-start;
 }
 
 

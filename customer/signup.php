@@ -11,6 +11,7 @@
     <link href="../style/basic.css" rel="stylesheet">
 </head>
 <body>
+    <?php include_once("../include_files/menu.php");?>
     <form action="signup.php" method="post">
         <h1>Inscription</h1>
         <input type="text" name="login" id="login" placeholder="Login" required>
@@ -29,7 +30,7 @@
         if(isset($_POST["login"]) && isset($_POST["mail"]) && isset($_POST["password"]) && isset($_POST["surname"]) && isset($_POST["firstname"])) {
         //If form is complete
 
-            include_once("../db_connection.php"); //Connect to db only when it's needed
+            include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
             extract($_POST); //Transform $_POST["var"] to $var
         
             $stmt = $db ->prepare("SELECT * FROM Customer WHERE Customer.login = ?");

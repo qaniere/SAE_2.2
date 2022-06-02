@@ -1,5 +1,12 @@
 # Rapport SAÉ 2.2
 
+### Sommaire 
+
+ 1. Problèmes rencontrés
+ 2. Mise en production
+
+### 1 - Mise en production
+
 Le premier problème que nous avons rencontré est la diversité des environnements : Nous développons tous sur XAMPP, notre serveur de production (https://coff-it.store) est contenu dans une image Docker. 
 
 Tous ces environnements n'ont pas une base de données au même endroit, avec les mêmes identifiants. Il devient alors compliqué d'inclure les identifiants de connexion directement dans le code qui sera poussé sur le dépôt git. 
@@ -16,3 +23,7 @@ DB_NAME=coff_it
 ```
 
 Une fois ce fichier lu par PHP, on peut utiliser la variable "$DB_URL" qui vaut "localhost"
+
+### 2 - Mise en production
+
+site, CI-CD, etc...
