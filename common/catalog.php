@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/catalog.css">
+    <link href="../style/basic.css" rel="stylesheet">
     <title>Catalogue</title>
 </head>
 <body>
+    <?php include_once("../include_files/menu.php");?>
     <form action="./item_display.php" method="GET">
     <h1>Catalogue</h1>
     <div class="container">

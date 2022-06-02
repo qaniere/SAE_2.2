@@ -11,6 +11,7 @@
     <link href="../style/basic.css" rel="stylesheet">
 </head>
 <body>
+    <?php include_once("../include_files/menu.php");?>
     <form action="login.php" method="post">
         <h1>Connexion</h1>
         <input type="text" name="login" id="login" placeholder="Votre login ou votre adresse email">
