@@ -11,6 +11,7 @@
     <link href="../style/basic.css" rel="stylesheet">
 </head>
 <body>
+    <?php include_once("../include_files/menu.php");?>
     <h1>Votre compte</h1>
     <?php        
         if(isset($_SESSION["id"])) {
