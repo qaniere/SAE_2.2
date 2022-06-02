@@ -16,7 +16,7 @@
     <?php        
         if(isset($_SESSION["id"])) {
 
-            include_once("../db_connection.php");
+            include_once("../include_files/db_connection.php");
             
             //Select stash and username
             $stmt = $db -> prepare("SELECT stash FROM Customer WHERE id = ?");

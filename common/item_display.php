@@ -7,7 +7,7 @@
         die("Aucun article séléctionné.");
     }
 
-    include_once("../db_connection.php");
+    include_once("../include_files/db_connection.php");
 
     //Check if the item exists
     $exists = $db->query("SELECT typeItem FROM BusinessSell WHERE typeItem = $id");

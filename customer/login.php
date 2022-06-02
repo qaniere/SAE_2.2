@@ -25,7 +25,7 @@
         //If form is completed
 
             extract($_POST);    
-            include_once("../db_connection.php");
+            include_once("../include_files/db_connection.php");
 
             $stmt = $db->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE Customer.login = ? OR CustomerProtectedData.email = ?");
             $stmt ->bind_param("ss", $login, $login);

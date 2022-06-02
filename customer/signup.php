@@ -30,7 +30,7 @@
         if(isset($_POST["login"]) && isset($_POST["mail"]) && isset($_POST["password"]) && isset($_POST["surname"]) && isset($_POST["firstname"])) {
         //If form is complete
 
-            include_once("../db_connection.php"); //Connect to db only when it's needed
+            include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
             extract($_POST); //Transform $_POST["var"] to $var
         
             $stmt = $db ->prepare("SELECT * FROM Customer WHERE Customer.login = ?");

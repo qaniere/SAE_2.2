@@ -14,7 +14,7 @@
     <h1>Catalogue</h1>
     <div class="container">
         <?php
-            include_once("../db_connection.php");
+            include_once("../include_files/db_connection.php");
 
             $stmt = $db->prepare("SELECT * FROM TypeItem ORDER BY id");
             $stmt -> execute();
