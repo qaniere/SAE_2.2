@@ -205,6 +205,7 @@ a:hover {
 }
 
 
+
 @keyframes jumping {
     from {transform: translateY(0);}
     to {transform: translateY(1vh) }
@@ -218,6 +219,10 @@ a:hover {
     }
 
 
+    .menu-item > a::before {
+        content: "- ";
+    }
+
     #logo-shadow { 
         height: 20em;
         width: 20em;
@@ -230,18 +235,37 @@ a:hover {
     }
 
     #account-pill {
+        padding: 1vh;
+        width: 10vw;
+        height: 10vw;
         margin: 0.5em;
-        width: 60vw;
+        border-radius: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    #account-pill > a {
+        display: none;
+    }
+
+    #user-logo {
+        height: 8vw;
     }
 
     #customer-block-container {
         flex-wrap: wrap
     }
 
+    #round {
+        margin-top: -10vh;
+    }
+
 
     .customer-block {
         width: 80vw;
         margin-bottom: 5vh;
-    }
-
+    }  
 }
