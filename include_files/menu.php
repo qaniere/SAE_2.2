@@ -2,7 +2,8 @@
     <a href="../index.php"> 
         <img src="../img/logo.png" alt="logo" id="menu-logo">
     </a>
-    <div id="menu" role="menu">
+    <img id="mobile-menu-icon" src="../img/menu.png" alt="L'icone du menu sur mobile">
+    <div id="menu" role="menu">    
         <div class="menu-item">
             <a href="../index.php">Accueil</a>
         </div>
@@ -34,4 +35,5 @@
             ?>
         </div>
 </nav>
+<script src="../scripts/menu.js"></script>
 <link rel="stylesheet" href="../style/menu.css">

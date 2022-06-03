@@ -60,6 +60,10 @@ nav {
     margin-right: 1vw;
 }
 
+#mobile-menu-icon {
+    display: none;
+}
+
 
 .menu-item > a {
     color: black;
@@ -82,4 +86,88 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+@media screen and (max-width: 1024px) {
+
+    nav {
+        margin-top: 0;
+        height: 11vh;
+    }
+
+
+    #menu-logo {
+        height: 5em;
+        width: 5em;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+    }
+
+    #banner-container {  
+        height: 88.6vh;
+    }
+    
+    #banner {
+        height: 88.6vh;
+    }
+    
+    #banner-text-container > div > h1 {
+        font-size: 15vw;
+        animation: none;
+        border-right: none;
+        white-space: pre-wrap;
+    }
+
+    #mobile-menu-icon { 
+        height: 5vh;
+        display: block;
+        margin-left: auto;
+        margin-right: 4vw;
+    }
+
+    #menu {
+        display: none;
+        flex-wrap: wrap;
+        position: absolute;
+
+        top: -8vh;
+        height: 25vh;
+        margin-top: 20vh;        
+    }
+
+    #round:hover {
+        height: 14vh;
+        width: 14vh;
+    }
+
+    #account-pill {
+        top: -20vw;
+        right: 30px;
+        width: 50vw;
+    }
+
+    #account-pill > img {
+        height: 5vw;
+    }
+
+    #account-pill > a {
+        font-size: 3vw;
+    }
+
+
+    .menu-item {
+        width: 100vw;
+        transition: 1s;
+        margin-bottom: 0.5vh;
+        justify-content: flex-start;
+    }
+
+    .menu-item > a::before {
+        content: "- ";
+    }
+
+    .more-space {
+        padding-bottom: 42vh;
+    }   
 }
