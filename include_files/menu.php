@@ -20,7 +20,7 @@
             <a href="">Notre équipe</a>
         </div>
         <div class="menu-item" role="menuitem">
-            <a href="">Contact</a>
+            <a href="../common/disconnect.php">Déconnexion</a>
         </div>
         <div id="account-pill">
             <img id="user-logo" src="../img/user.png">
