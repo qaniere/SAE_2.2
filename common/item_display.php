@@ -1,3 +1,4 @@
+<link href="../style/basic.css" rel="stylesheet">
 <?php
     include_once("../include_files/menu.php");
     if (isset($_GET["item"])) {
@@ -66,7 +67,6 @@
 
 <!-- an form to order an item -->
 <br>
-<link href="../style/basic.css" rel="stylesheet">
 <form action="a preciser" method="POST">
     <label for="">Nombre d'articles : </label>
     <input type="number" value="1" min="1" max=<?php echo $max_quantity?> name="nbArticles">
