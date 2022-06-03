@@ -21,10 +21,10 @@
             <?php
                 if(isset($_SESSION["id"])) {
                     $name = $_SESSION["firstname"];
-                    echo "<a href='./customer/account.php'>Bonjour $name !</a>";
+                    echo "<a id='pill-content' href='./customer/account.php'>Bonjour $name !</a>";
 
                 } else {
-                    echo "<a href='./customer/login.php'>Vous n'êtes pas connecté</a>";
+                    echo "<a id='pill-content' href='./customer/login.php'>Vous n'êtes pas connecté</a>";
                 }
             ?>
         </div>
@@ -94,5 +94,6 @@
             </div>
         </div>       
     </div>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
