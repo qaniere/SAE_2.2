@@ -1,5 +1,59 @@
 <?php
     session_start();
+    $message = "";
+
+    if(isset($_POST["login"]) && isset($_POST["mail"]) && isset($_POST["password"]) && isset($_POST["surname"]) && isset($_POST["firstname"])) {
+        //If form is complete
+
+            include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
+            extract($_POST); //Transform $_POST["var"] to $var
+        
+            $stmt = $db ->prepare("SELECT * FROM Customer WHERE Customer.login = ?");
+            $stmt ->bind_param("s", $login);
+            $stmt ->execute();
+
+            $result = $stmt ->get_result();
+            $count_login = $result ->num_rows;
+            //If this var is different of 0, then insertion can't be done
+
+            $stmt = $db ->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE CustomerProtectedData.email = ?");
+            $stmt ->bind_param("s", $mail);
+            $stmt ->execute();
+
+            $result = $stmt ->get_result();
+            $count_email= $result ->num_rows;
+                
+            if($count_login != 0) {
+                $message = "<strong>Ce login est déjà utilisé.</strong>";
+
+            } else if($count_email != 0) {
+                $message = "<strong>Cette adresse e-mail est déjà utilisé.</strong>";
+
+            } else {
+
+                $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+
+                $stmt = $db ->prepare("INSERT INTO Customer (login, password_hash, stash) VALUES (?, ?, 0)");
+                $stmt ->bind_param("ss", $login, $password_hashed);
+                $stmt ->execute();
+
+                $id = $db->insert_id; //The id is automatically incrementing in the database when a tuple is inserted
+
+                $stmt = $db ->prepare("INSERT INTO CustomerProtectedData (id, surname, firstname, email) VALUES (?, ?, ?, ?)");
+                $stmt ->bind_param("isss", $id, $surname, $firstname, $mail);
+                $stmt ->execute();
+
+                $_SESSION["id"] = $id;
+                $_SESSION["login"] = $login;
+                $_SESSION["surname"] = $surname;
+                $_SESSION["firstname"] = $firstname;
+                $_SESSION["mail"] = $mail;
+                $_SESSION["stash"] = 0;
+                $_SESSION["account_type"] = "customer";
+
+                header("Location: account.php");
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,58 +99,7 @@
                 <input type="submit" value="Inscription">
             </div>
             <?php
-                if(isset($_POST["login"]) && isset($_POST["mail"]) && isset($_POST["password"]) && isset($_POST["surname"]) && isset($_POST["firstname"])) {
-                //If form is complete
-
-                    include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
-                    extract($_POST); //Transform $_POST["var"] to $var
-                
-                    $stmt = $db ->prepare("SELECT * FROM Customer WHERE Customer.login = ?");
-                    $stmt ->bind_param("s", $login);
-                    $stmt ->execute();
-
-                    $result = $stmt ->get_result();
-                    $count_login = $result ->num_rows;
-                    //If this var is different of 0, then insertion can't be done
-
-                    $stmt = $db ->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE CustomerProtectedData.email = ?");
-                    $stmt ->bind_param("s", $mail);
-                    $stmt ->execute();
-
-                    $result = $stmt ->get_result();
-                    $count_email= $result ->num_rows;
-                        
-                    if($count_login != 0) {
-                        echo "<strong>Ce login est déjà utilisé.</strong>";
-
-                    } else if($count_email != 0) {
-                        echo "<strong>Cette adresse e-mail est déjà utilisé.</strong>";
-
-                    } else {
-
-                        $password_hashed = password_hash($password, PASSWORD_DEFAULT);
-
-                        $stmt = $db ->prepare("INSERT INTO Customer (login, password_hash, stash) VALUES (?, ?, 0)");
-                        $stmt ->bind_param("ss", $login, $password_hashed);
-                        $stmt ->execute();
-
-                        $id = $db->insert_id; //The id is automatically incrementing in the database when a tuple is inserted
-
-                        $stmt = $db ->prepare("INSERT INTO CustomerProtectedData (id, surname, firstname, email) VALUES (?, ?, ?, ?)");
-                        $stmt ->bind_param("isss", $id, $surname, $firstname, $mail);
-                        $stmt ->execute();
-
-                        $_SESSION["id"] = $id;
-                        $_SESSION["login"] = $login;
-                        $_SESSION["surname"] = $surname;
-                        $_SESSION["firstname"] = $firstname;
-                        $_SESSION["mail"] = $mail;
-                        $_SESSION["stash"] = 0;
-                        $_SESSION["account_type"] = "customer";
-
-                        header("Location: account.php");
-                    }
-                }
+                echo $message;
             ?>
             <p> Cette page d'inscription est réservée aux partucliers. Vous êtes une entreprise ? <a href="../business/register.php">Cliquez ici</a> </p>
         </form>

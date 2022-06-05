@@ -1,5 +1,51 @@
 <?php
     session_start();
+    $message = "";
+
+    if(isset($_POST["business_name"]) && isset($_POST["mail"]) && isset($_POST["country"]) && isset($_POST["password"])) {
+        //If form is complete
+
+            include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
+            extract($_POST); //Transform $_POST["var"] to $var
+        
+            $stmt = $db ->prepare("SELECT * FROM Business WHERE Business.name = ?");
+            $stmt ->bind_param("s", $business_name);
+            $stmt ->execute();
+
+            $result = $stmt ->get_result();
+            $count_login = $result ->num_rows;
+            //If this var is different of 0, then insertion can't be done
+
+            $stmt = $db ->prepare("SELECT * FROM Business  WHERE Business.email = ?");
+            $stmt ->bind_param("s", $mail);
+            $stmt ->execute();
+
+            $result = $stmt ->get_result();
+            $count_email= $result ->num_rows;
+                
+            if($count_login != 0) {
+                $message = "<strong>Ce nom d'entreprise est déjà utilisé.</strong>";
+
+            } else if($count_email != 0) {
+                $message = "<strong>Cette adresse e-mail est déjà utilisée.</strong>";
+
+            } else {
+
+                $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+
+                $stmt = $db ->prepare("INSERT INTO Business (email, name, country, password_hash) VALUES (?, ?, ?, ?)");
+                $stmt ->bind_param("ssss", $mail, $business_name, $country, $password_hashed);
+                $stmt ->execute();
+                
+                $_SESSION["id"] = $db ->insert_id;
+                $_SESSION["account_type"] = "business";
+                $_SESSION["name"] = $business_name;
+                $_SESSION["mail"] = $mail;
+                $_SESSION["country"] = $country;
+
+                header("Location: " ."dashboard.php");
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,50 +86,7 @@
                 <button type="submit">Inscription</button>
             </div>
             <?php
-                if(isset($_POST["business_name"]) && isset($_POST["mail"]) && isset($_POST["country"]) && isset($_POST["password"])) {
-                //If form is complete
-
-                    include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
-                    extract($_POST); //Transform $_POST["var"] to $var
-                
-                    $stmt = $db ->prepare("SELECT * FROM Business WHERE Business.name = ?");
-                    $stmt ->bind_param("s", $business_name);
-                    $stmt ->execute();
-
-                    $result = $stmt ->get_result();
-                    $count_login = $result ->num_rows;
-                    //If this var is different of 0, then insertion can't be done
-
-                    $stmt = $db ->prepare("SELECT * FROM Business  WHERE Business.email = ?");
-                    $stmt ->bind_param("s", $mail);
-                    $stmt ->execute();
-
-                    $result = $stmt ->get_result();
-                    $count_email= $result ->num_rows;
-                        
-                    if($count_login != 0) {
-                        echo "<strong>Ce nom d'entreprise est déjà utilisé.</strong>";
-
-                    } else if($count_email != 0) {
-                        echo "<strong>Cette adresse e-mail est déjà utilisée.</strong>";
-
-                    } else {
-
-                        $password_hashed = password_hash($password, PASSWORD_DEFAULT);
-
-                        $stmt = $db ->prepare("INSERT INTO Business (email, name, country, password_hash) VALUES (?, ?, ?, ?)");
-                        $stmt ->bind_param("ssss", $mail, $business_name, $country, $password_hashed);
-                        $stmt ->execute();
-                        
-                        $_SESSION["id"] = $db ->insert_id;
-                        $_SESSION["account_type"] = "business";
-                        $_SESSION["name"] = $business_name;
-                        $_SESSION["mail"] = $mail;
-                        $_SESSION["country"] = $country;
-
-                        header("Location: " ."dashboard.php");
-                    }
-                }
+                echo $message;
             ?>
             <p> Cette page d'inscription est réservée aux entreprise. Vous êtes un particulier ? <a href="../customer/register.php">Cliquez ici</a> </p>
         </form>

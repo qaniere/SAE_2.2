@@ -1,5 +1,7 @@
 <?php
     session_start();
+    
+    $message = "";
 
     if(isset($_SESSION["id"])) {
     //User is already logged in
@@ -10,7 +12,68 @@
         } else if($_SESSION["account_type"] == "customer") {
             header("Location: " ."../customer/account.php");
         } 
-    }
+
+    } else if(isset($_POST["login"]) && isset($_POST["password"]) && isset($_POST["radio_account_type"])) {
+        //If form is completed
+
+            include_once("../include_files/db_connection.php");
+            extract($_POST); //Transform $_POST into variables
+
+            if($radio_account_type == "customer") {
+            //The user is a customer 
+            
+                $stmt = $db->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE Customer.login = ? OR CustomerProtectedData.email = ?");
+                $stmt ->bind_param("ss", $login, $login);
+                $stmt ->execute();
+
+                $result = $stmt ->get_result() ->fetch_assoc(); //Get the SQL data as an array 
+                
+                if($result == NULL) {
+                    $message = "<strong>Impossible de trouver à compte particulier associé à '$login'</strong>";
+
+                } else {
+                    
+                    if(password_verify($password, $result["password_hash"])) {
+                        foreach ($result as $key => $value) {
+                            $_SESSION[$key] = $value;
+                        }
+
+                        $_SESSION["account_type"] = "customer";
+                        header("Location: ../customer/account.php");
+
+                    } else {
+                        $message = "<strong>Mot de passe incorrect !</strong>";
+                    }
+                }
+
+            } else if($radio_account_type == "business") {
+            //The user is a business
+
+                $stmt = $db->prepare("SELECT * FROM Business WHERE Business.name = ? OR Business.email = ?");
+                $stmt ->bind_param("ss", $login, $login);
+                $stmt ->execute();
+
+                $result = $stmt ->get_result() ->fetch_assoc(); //Get the SQL data as an array 
+                
+                if($result == NULL) {
+                    $message = "<strong>Impossible de trouver à compte associé à '$login'</strong>";
+
+                } else {
+                    
+                    if(password_verify($password, $result["password_hash"])) {
+                        foreach ($result as $key => $value) {
+                            $_SESSION[$key] = $value;
+                        }
+
+                        $_SESSION["account_type"] = "business";
+                        header("Location: ../business/dashboard.php");
+
+                    } else {
+                        $message = "<strong>Mot de passe incorrect !</strong>";
+                    }
+                }
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,67 +119,7 @@
                 <input type="submit" value="Connexion">
             </div>
             <?php
-                if(isset($_POST["login"]) && isset($_POST["password"]) && isset($_POST["radio_account_type"])) {
-                //If form is completed
-
-                    include_once("../include_files/db_connection.php");
-                    extract($_POST); //Transform $_POST into variables
-
-                    if($radio_account_type == "customer") {
-                    //The user is a customer 
-                    
-                        $stmt = $db->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE Customer.login = ? OR CustomerProtectedData.email = ?");
-                        $stmt ->bind_param("ss", $login, $login);
-                        $stmt ->execute();
-
-                        $result = $stmt ->get_result() ->fetch_assoc(); //Get the SQL data as an array 
-                        
-                        if($result == NULL) {
-                            echo "<strong>Impossible de trouver à compte particulier associé à '$login'</strong>";
-
-                        } else {
-                            
-                            if(password_verify($password, $result["password_hash"])) {
-                                foreach ($result as $key => $value) {
-                                    $_SESSION[$key] = $value;
-                                }
-
-                                $_SESSION["account_type"] = "customer";
-                                header("Location: ../customer/account.php");
-
-                            } else {
-                                echo "<strong>Mot de passe incorrect !</strong>";
-                            }
-                        }
-
-                    } else if($radio_account_type == "business") {
-                    //The user is a business
-
-                        $stmt = $db->prepare("SELECT * FROM Business WHERE Business.name = ? OR Business.email = ?");
-                        $stmt ->bind_param("ss", $login, $login);
-                        $stmt ->execute();
-
-                        $result = $stmt ->get_result() ->fetch_assoc(); //Get the SQL data as an array 
-                        
-                        if($result == NULL) {
-                            echo "<strong>Impossible de trouver à compte associé à '$login'</strong>";
-
-                        } else {
-                            
-                            if(password_verify($password, $result["password_hash"])) {
-                                foreach ($result as $key => $value) {
-                                    $_SESSION[$key] = $value;
-                                }
-
-                                $_SESSION["account_type"] = "business";
-                                header("Location: ../business/dashboard.php");
-
-                            } else {
-                                echo "<strong>Mot de passe incorrect !</strong>";
-                            }
-                        }
-                    }
-                }
+                echo $message;
             ?>
             </form>
         <div>
