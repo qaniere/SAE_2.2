@@ -25,12 +25,16 @@
         <div id="account-pill">
             <img id="user-logo" src="../img/user.png">
             <?php
-                if(isset($_SESSION["id"])) {
+                if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer") {
                     $name = $_SESSION["firstname"];
                     echo "<a href='../customer/account.php'>Bonjour $name !</a>";
 
+                } else if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "business") {
+                    $name = $_SESSION["name"];
+                    echo "<a href='../business/dashboard.php'>Bonjour $name !</a>";
+
                 } else {
-                    echo "<a href='../customer/login.php'>Vous n'êtes pas connecté</a>";
+                    echo "<a href='../common/login.php'>Vous n'êtes pas connecté</a>";
                 }
             ?>
         </div>

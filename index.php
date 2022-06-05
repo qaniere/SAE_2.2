@@ -19,12 +19,16 @@
         <div id="account-pill">
             <img id="user-logo" src="./img/user.png">
             <?php
-                if(isset($_SESSION["id"])) {
+                if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer") {
                     $name = $_SESSION["firstname"];
-                    echo "<a id='pill-content' href='./customer/account.php'>Bonjour $name !</a>";
+                    echo "<a href='./customer/account.php'>Bonjour $name !</a>";
+
+                } else if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "business") {
+                    $name = $_SESSION["name"];
+                    echo "<a href='./business/dashboard.php'>Bonjour $name !</a>";
 
                 } else {
-                    echo "<a id='pill-content' href='./customer/login.php'>Vous n'êtes pas connecté</a>";
+                    echo "<a href='./common/login.php'>Vous n'êtes pas connecté</a>";
                 }
             ?>
         </div>
@@ -70,8 +74,8 @@
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
                     <div class="button-container">
-                        <a href="./customer/signup.php"><button>S'inscrire</button></a>
-                        <a href="./customer/login.php"><button>Se connecter</button></a>
+                        <a href="./customer/register.php"><button>S'inscrire</button></a>
+                        <a href="./common/login.php"><button>Se connecter</button></a>
                     </div>      
                 </p>
             </div>
@@ -87,8 +91,8 @@
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
                     <div class="button-container">
-                        <button>S'inscrire</button>
-                        <button>Se connecter</button>
+                        <a href="./business/register.php"><button>S'inscrire</button> </a>
+                        <a href="./common/login.php"><button>Se connecter</button></a>
                     </div> 
                 </p>
             </div>

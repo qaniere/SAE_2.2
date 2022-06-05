@@ -1,0 +1,65 @@
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 100vh;
+    padding: 1em;
+    border-radius: 30px;
+    border: 3px solid black;
+}
+
+fieldset {
+    width: 15em;
+}
+
+
+#form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 80vh;
+}
+
+#form-title {
+    width: 100%;
+    text-align: center;
+}
+
+
+.form-question {
+    width: 100%;
+    margin-bottom: 1em;
+    justify-content: center;
+    
+}
+
+
+@media screen and (max-width: 1024px) {
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    
+        width: 100%;
+        padding: 1em;
+        border-radius: 30;
+        border: none;
+    } 
+
+    p {
+        text-align: center;
+    }
+
+    #form-container {
+        width: auto;
+        height: auto;
+        overflow-x: hidden;    
+    }
+
+    #form-title {
+        font-size: 30px;
+    }
+}
