@@ -4,9 +4,12 @@ html {
 
 body {
     margin: 0;
+    overflow-y: hidden;
+    
+    line-height: 1.5;
     font-family: 'Roboto', sans-serif;
     background-color: #d6e5e1;
-    line-height: 1.5;
+    
 }
 
 h2 {
