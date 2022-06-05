@@ -7,18 +7,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Connexion entreprises</title>
     <link href="../style/basic.css" rel="stylesheet">
 </head>
 <body>
     <?php include_once("../include_files/menu.php");?>
     <form action="login.php" method="post">
-        <h1>Connexion particuliers</h1>
-        <input type="text" name="login" id="login" placeholder="Votre login ou votre adresse email">
+        <h1>Connexion</h1>
+        <input type="text" name="login" id="login" placeholder="Le nom de l'entreprise ou son adresse email">
         <br> <br>
         <input type="password" name="password" id="password" placeholder="Mot de passe">
         <br> <br>
-        <button type="submit">Connexion particuliers</button>
+        <button type="submit">Connexion</button>
     </form>
     <?php
         if(isset($_POST["login"]) && isset($_POST["password"])) {
@@ -27,7 +27,7 @@
             extract($_POST);    
             include_once("../include_files/db_connection.php");
 
-            $stmt = $db->prepare("SELECT * FROM Customer LEFT JOIN CustomerProtectedData ON Customer.id = CustomerProtectedData.id WHERE Customer.login = ? OR CustomerProtectedData.email = ?");
+            $stmt = $db->prepare("SELECT * FROM Business WHERE Business.name = ? OR Business.email = ?");
             $stmt ->bind_param("ss", $login, $login);
             $stmt ->execute();
 

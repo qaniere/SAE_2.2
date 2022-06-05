@@ -25,6 +25,7 @@
         <input type="password" name="password" id="password" placeholder="mot de passe" required>
         <br> <br>
         <button type="submit">Inscription</button>
+        <p> Cette page d'inscription est réservée aux partucliers. Vous êtes une entreprise ? <a href="../business/register.php">Cliquez ici</a> </p>
     </form>
     <?php
         if(isset($_POST["login"]) && isset($_POST["mail"]) && isset($_POST["password"]) && isset($_POST["surname"]) && isset($_POST["firstname"])) {

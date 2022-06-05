@@ -70,8 +70,8 @@
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
                     <div class="button-container">
-                        <a href="./customer/signup.php"><button>S'inscrire</button></a>
-                        <a href="./customer/login.php"><button>Se connecter</button></a>
+                        <a href="./customer/register.php"><button>S'inscrire</button></a>
+                        <a href="./common/login.php"><button>Se connecter</button></a>
                     </div>      
                 </p>
             </div>
@@ -87,8 +87,8 @@
                     kinfolk slow-carb migas cold-pressed ennui.
                     <br>
                     <div class="button-container">
-                        <button>S'inscrire</button>
-                        <button>Se connecter</button>
+                        <a href="./business/register.php"><button>S'inscrire</button> </a>
+                        <a href="./common/login.php"><button>Se connecter</button></a>
                     </div> 
                 </p>
             </div>
