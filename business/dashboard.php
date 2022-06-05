@@ -25,6 +25,6 @@
 <body>
     <?php include_once("../include_files/menu.php");?>
     <h1>Tableau de bord</h1>
-    <?php echo "<p>Vous êtes connecté au nom de l'entreprise $business_name </p>"; ?>
+    <?php echo "<p>Vous êtes connecté au nom de l'entreprise " . $_SESSION["name"] . "</p>"; ?>
     <a href="./add_item.php">Ajouter un produit</a>
 </html>
