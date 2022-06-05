@@ -37,10 +37,10 @@ CREATE TABLE `Business` (
 -- Dumping data for table `Business`
 --
 
-INSERT INTO `Business` (`id`, `name`, `country`) VALUES
-(1, 'Ecologic', 'France'),
-(2, 'Veolia', 'France'),
-(3, 'yes yes', 'France');
+INSERT INTO `Business` (`id`, `email` `name`, `country`) VALUES
+(1, 'ecologic@gmail.com', 'Ecologic', 'France'),
+(2, 'veolia@gmail.com', 'Veolia', 'France'),
+(3, 'yes@gmail.com', 'yes yes', 'France');
 
 -- --------------------------------------------------------
 
