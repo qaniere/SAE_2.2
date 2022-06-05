@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Inscription particuliers</title>
     <link href="../style/basic.css" rel="stylesheet">
 </head>
 <body>
     <?php include_once("../include_files/menu.php");?>
     <form action="signup.php" method="post">
-        <h1>Inscription</h1>
+        <h1>Inscription particuliers</h1>
         <input type="text" name="login" id="login" placeholder="Login" required>
         <br> <br>
         <input type="email" name="mail" id="mail" placeholder="e-mail" required>
@@ -24,7 +24,7 @@
         <br> <br>
         <input type="password" name="password" id="password" placeholder="mot de passe" required>
         <br> <br>
-        <button type="submit">Connection</button>
+        <button type="submit">Inscription</button>
     </form>
     <?php
         if(isset($_POST["login"]) && isset($_POST["mail"]) && isset($_POST["password"]) && isset($_POST["surname"]) && isset($_POST["firstname"])) {

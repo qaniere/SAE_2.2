@@ -13,12 +13,12 @@
 <body>
     <?php include_once("../include_files/menu.php");?>
     <form action="login.php" method="post">
-        <h1>Connexion</h1>
+        <h1>Connexion particuliers</h1>
         <input type="text" name="login" id="login" placeholder="Votre login ou votre adresse email">
         <br> <br>
         <input type="password" name="password" id="password" placeholder="Mot de passe">
         <br> <br>
-        <button type="submit">Connexion</button>
+        <button type="submit">Connexion particuliers</button>
     </form>
     <?php
         if(isset($_POST["login"]) && isset($_POST["password"])) {
