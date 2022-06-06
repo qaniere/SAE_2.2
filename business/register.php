@@ -2,7 +2,7 @@
     session_start();
     $message = "";
 
-    if(isset($_POST["business_name"]) && isset($_POST["mail"]) && isset($_POST["country"]) && isset($_POST["password"])) {
+    if(isset($_POST["business_name"]) && isset($_POST["mail"]) && isset($_POST["country"]) && isset($_POST["password"]) && isset($_POST["passwordConf"])) {
         //If form is complete
 
             include_once("../include_files/db_connection.php"); //Connect to db only when it's needed
@@ -23,7 +23,10 @@
             $result = $stmt ->get_result();
             $count_email= $result ->num_rows;
                 
-            if($count_login != 0) {
+            if ($password != $passwordConf) {
+                $message = "<strong>Les mots de passe ne correspondent pas.</strong>";
+            }
+            else if($count_login != 0) {
                 $message = "<strong>Ce nom d'entreprise est déjà utilisé.</strong>";
 
             } else if($count_email != 0) {
@@ -81,6 +84,11 @@
                 <label for="password"><strong>Mot de passe</strong></label>
                 <br>
                 <input type="password" name="password" id="password" required>
+            </div>
+            <div class="form-question">
+                <label for="passwordConf"><strong>Confirmation du mot de passe</strong></label>
+                <br>
+                <input type="password" name="passwordConf" id="passwordConf" required>
             </div>
             <div class="form-question">
                 <button type="submit">Inscription</button>
