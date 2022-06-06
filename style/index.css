@@ -239,14 +239,16 @@ a:hover {
 
     #account-pill {
         padding: 1vh;
-        width: 10vw;
+        width: auto;
         height: 10vw;
         margin: 0.5em;
+        overflow: hidden;
         border-radius: 100%;
 
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: nowrap;
         
     }
 
