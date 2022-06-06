@@ -4,7 +4,7 @@ const PILL_CONTENT = document.getElementById("pill-content");
 
 PILL.addEventListener("click", () => {
 
-    if(window.innerWidth < 1024) {
+    if(screen.width < 1024) {
         if(isPillVisible) {
             isPillVisible = false;
             PILL_CONTENT.style.display = "none";
