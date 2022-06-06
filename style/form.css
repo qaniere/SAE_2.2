@@ -4,13 +4,17 @@ form {
     justify-content: center;
 
     width: 100vh;
-    padding: 1em;
+    padding: 0.5em;
     border-radius: 30px;
     border: 3px solid black;
 }
 
 fieldset {
     width: 15em;
+}
+
+p {
+    margin-bottom: 0em;
 }
 
 
