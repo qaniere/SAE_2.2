@@ -25,12 +25,15 @@
                 
             if ($password != $passwordConf) {
                 $message = "<strong>Les mots de passe ne correspondent pas.</strong>";
-            }
-            else if($count_login != 0) {
+                
+            } else if($count_login != 0) {
                 $message = "<strong>Ce login est déjà utilisé.</strong>";
 
             } else if($count_email != 0) {
                 $message = "<strong>Cette adresse e-mail est déjà utilisé.</strong>";
+
+            } else if(!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                $message = "<strong>Adresse email non valide.</strong>";
 
             } else {
 
