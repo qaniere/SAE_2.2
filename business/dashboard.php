@@ -8,6 +8,7 @@
 
     if($_SESSION["account_type"] != "business") { //If not a business
         header("Location: " ."../index.php");
+        die();
     }
 
     extract($_SESSION);
@@ -21,10 +22,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord</title>
     <link rel="stylesheet" href="../style/basic.css">
+    <link rel="stylesheet" href="../style/dashboard.css">
 </head>
 <body>
     <?php include_once("../include_files/menu.php");?>
-    <h1>Tableau de bord</h1>
-    <?php echo "<p>Vous êtes connecté au nom de l'entreprise " . $_SESSION["name"] . "</p>"; ?>
-    <a href="./add_item.php">Ajouter un produit</a>
+    <div id="content">         
+        <h1>Tableau de bord</h1>
+        <?php echo "<p>Vous êtes connecté au nom de l'entreprise <strong>" . $_SESSION["name"] . "</strong></p>"; ?>
+        <p> Vos dernières ventes : </p>
+        <table>
+            <tr>
+                <td><strong>Nom produit</produit></td>
+                <td><strong>Quantités</produit></td>
+                <td><strong>Client</produit></td>
+                <td><strong>Date et heure</produit></td>
+            </tr>
+        </table>
+        <h3>Actions :</h3>
+        <ul>
+            <li><a href="./sell_item.php">Ajouter un produit à vendre</a></li>
+            <li><a href="./add_item.php">Ajouter un produit recherché</a></li>
+        </ul>
+    </div>
 </html>
