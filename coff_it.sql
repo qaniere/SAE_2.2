@@ -209,17 +209,13 @@ INSERT INTO `Mendeleiev` (`Z`, `symbol`, `name`) VALUES
 
 CREATE TABLE `TypeItem` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_extension` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `TypeItem`
 --
-
-INSERT INTO `TypeItem` (`id`, `name`) VALUES
-(3, 'dell latitude 7490'),
-(2, 'Fairphone 2'),
-(1, 'Iphone 5');
 
 -- --------------------------------------------------------
 
