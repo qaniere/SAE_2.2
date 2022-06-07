@@ -20,6 +20,7 @@
         include_once("../include_files/db_connection.php");
         extract($_POST);
 
+
         $stmt = $db->prepare("SELECT * FROM TypeItem WHERE name = ?");
         $stmt->bind_param("s", $item_name);
         $stmt->execute();
@@ -47,9 +48,13 @@
 
             } else {
 
+                //Get the file exentension of the image
+                $array = explode(".", $_FILES["image"]["name"]);
+                $file_extension = end($array);
+
                 //Insert the name in the first table and get an item id from the databse
-                $stmt = $db->prepare("INSERT INTO TypeItem (name) VALUES (?)");
-                $stmt->bind_param("s", $item_name);
+                $stmt = $db->prepare("INSERT INTO TypeItem (name, file_extension) VALUES (?, ?)");
+                $stmt->bind_param("ss", $item_name, $file_extension);
                 $stmt->execute();
 
                 $item_id = $stmt->insert_id;
@@ -67,10 +72,6 @@
                 $stmt = $db->prepare("INSERT INTO BusinessSell (business, typeItem, price, quantity) VALUES (?, ?, ?, ?)");
                 $stmt->bind_param("iiii", $id, $item_id, $price, $quantity);
                 $stmt->execute();
-
-                //Get the file exentension of the image
-                $array = explode(".", $_FILES["image"]["name"]);
-                $file_extension = end($array);
 
                 //Set paths
                 $upload_directory = "../catalog_pictures/";
