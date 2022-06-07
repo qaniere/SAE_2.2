@@ -14,9 +14,7 @@
     include_once("../include_files/menu.php");
     include_once("../include_files/db_connection.php");
     $total = 0;
-    print_r($_SESSION["cart"]);
     foreach ($_SESSION["cart"] as $id => $businessID) {
-        echo $id;
         foreach ($businessID as $nbArticles) {
             echo "<img src='../uploaded_files/" . $id . ".jpg' height='400'><br>";
             $stmt = $db -> prepare("SELECT name, price, quantity FROM TypeItem JOIN BusinessSell ON BusinessSell.typeItem = TypeItem.id WHERE id = ?");

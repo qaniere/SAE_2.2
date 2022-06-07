@@ -43,6 +43,19 @@
                 $quantity = $row["quantity"];
                 echo "$element : $quantity<br>";
             }
+            
+            echo "<h3>Historique des achats</h3>";
+            $stmt = $db->prepare("SELECT TypeItem.name AS itemName, Business.name AS businessName, CustomerOrder.quantity, price FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ?");
+            $stmt->bind_param("i", $_SESSION["id"]);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $itemID = $row["itemName"];
+                $businessID = $row["businessName"];
+                $quantity = $row["quantity"];
+                $price = $row["price"]*$quantity;
+                echo "Produit : $itemID, Business : $businessID, Quantité : $quantity, Prix : $price €<br>";
+            }
 
         } else {
             echo "Vous n'êtes pas connecté. Allez sur <a href='login.php'>login.php</a>.";
