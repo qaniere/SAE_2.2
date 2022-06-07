@@ -31,15 +31,15 @@ CREATE TABLE `Business` (
   `id` int(11) NOT NULL,
   `email` varchar(200) NOT NULL,
   `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
-  `password_hash` varchar(255) NOT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `Business`
 --
 
-INSERT INTO `Business` (`id`, `email` `name`, `country`, `password_hash`) VALUES
+INSERT INTO `Business` (`id`, `email`, `name`, `country`, `password_hash`) VALUES
 (1, 'ecologic@gmail.com', 'Ecologic', 'France', 'x'),
 (2, 'veolia@gmail.com', 'Veolia', 'France', 'y'),
 (3, 'yes@gmail.com', 'yes yes', 'France', 'z');
