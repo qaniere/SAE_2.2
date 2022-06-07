@@ -27,7 +27,7 @@
                 $item = $row["name"];
                 echo "<div class='article'>";
                 echo "<div class='item'><h3>$item</h3></div>";
-                echo "<div class='item'><img src='../catalog_pictures/" . $row["id"] . "." .  $row["file_extension"] . "' width='300'></div>";
+                echo "<div class='item'><a href='../common/item_display.php?item=". $row['id']. "'><img src='../catalog_pictures/" . $row["id"] . "." .  $row["file_extension"] . "' width='300'></a></div>";
                 echo "<div class='item'><button value='" . $row["id"] . "' name='item' type='submit' class='button'>Voir</button></div>";
                 echo "</div>";
             }
