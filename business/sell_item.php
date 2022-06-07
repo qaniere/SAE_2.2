@@ -30,32 +30,67 @@
             $message = "<strong>Cet objet existe déjà dans le catalogue</strong>";
 
         } else {
-            //Insert the name in the first table and get an item id from the databse
-            $stmt = $db->prepare("INSERT INTO TypeItem (name) VALUES (?)");
-            $stmt->bind_param("s", $item_name);
-            $stmt->execute();
 
-            $item_id = $stmt->insert_id;
-
-            //Insert the spec into the second table
-            $stmt = $db->prepare("INSERT INTO TypeItemDetails (typeItem, attribute, value) VALUES (?, ?, ?)");
             $specs_lines = explode("\n", $specs);
+            $error = false;
 
             foreach($specs_lines as $line) {
                 $specs_array = explode("=", $line);
-                $stmt->bind_param("iss", $item_id, $specs_array[0], $specs_array[1]);
-                $stmt->execute();
+                if(sizeof($specs_array) != 2) {
+                    $error = true;
+                    break;
+                }
             }
 
-            //Insert the offer in the third table
-            $stmt = $db->prepare("INSERT INTO BusinessSell (business, typeItem, price, quantity) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("iiii", $id, $item_id, $price, $quantity);
-            $stmt->execute();
-        }
+            if($error) {
+                $message = "<strong>Format des caractéristiques incorrect !</strong>";
 
-        
+            } else {
+
+                //Insert the name in the first table and get an item id from the databse
+                $stmt = $db->prepare("INSERT INTO TypeItem (name) VALUES (?)");
+                $stmt->bind_param("s", $item_name);
+                $stmt->execute();
+
+                $item_id = $stmt->insert_id;
+
+                //Insert the spec into the second table
+                $stmt = $db->prepare("INSERT INTO TypeItemDetails (typeItem, attribute, value) VALUES (?, ?, ?)");
+
+                foreach($specs_lines as $line) {
+                    $specs_array = explode("=", $line);
+                    $stmt->bind_param("iss", $item_id, $specs_array[0], $specs_array[1]);
+                    $stmt->execute();
+                }
+
+                //Insert the offer in the third table
+                $stmt = $db->prepare("INSERT INTO BusinessSell (business, typeItem, price, quantity) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("iiii", $id, $item_id, $price, $quantity);
+                $stmt->execute();
+
+                //Get the file exentension of the image
+                $array = explode(".", $_FILES["image"]["name"]);
+                $file_extension = end($array);
+
+                //Set paths
+                $upload_directory = "../catalog_pictures/";
+                $file = $upload_directory . $item_id . "." . $file_extension;
+
+                //Create the upload dir if it doesn't exist
+                if(!is_dir($upload_directory)) {
+                    mkdir($upload_directory);
+                }
+
+                //Move the file to the upload directory
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $file)) {
+                    $message = "<strong>Objet ajouté au catalogue</strong>";
+
+                } else {
+                    $message = "<strong>Erreur lors de l'ajout de l'objet au catalogue</strong>";
+                }
+            }
+        }      
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
