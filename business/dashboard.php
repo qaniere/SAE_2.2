@@ -38,10 +38,16 @@
                 <td><strong>Date et heure</produit></td>
             </tr>
         </table>
-        <h3>Actions :</h3>
+        <h2>Actions</h2>
+        <h3>Vendre un objet</h3>
         <ul>
-            <li><a href="./sell_item.php">Ajouter un produit à vendre</a></li>
-            <li><a href="./add_item.php">Ajouter un produit recherché</a></li>
+            <li><a href="./sell_new_item.php">Ajouter un produit à vendre non présent dans le catalogue</a></li>
+            <li><a href="./sell_catalog_item.php">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
+        </ul>
+        <h3>Rechercher un objet</h3>
+        <ul>
+            <li><a href="">Ajouter un produit recherché non présent dans le catalogue</a></li>
+            <li><a href="">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
         </ul>
     </div>
 </html>

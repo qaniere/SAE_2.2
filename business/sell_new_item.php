@@ -107,7 +107,11 @@
     <?php include_once("../include_files/menu.php");?>
     <div id="form-container">
         <form action="sell_item.php" method="post" enctype="multipart/form-data">
-            <h1 id="form-title">Ajouter un objet à vendre</h1>
+            <h1 id="form-title">Ajouter un nouvel objet à vendre</h1>
+            <p>
+                Cette page vous permet de vendre un produit qui n'est pas présent dans le catalogue. 
+                Si votre objet est déjà présent dans le catalogue, utilisez <a href="sell_catalog_item.php">cette page</a>
+            </p>
             <div class="form-question">
                 <label for="item-name"><strong>Nom de l'objet</strong></label>
                 <br>
