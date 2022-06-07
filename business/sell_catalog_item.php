@@ -13,6 +13,20 @@
     }
 
     extract($_SESSION);
+
+    if(isset($_POST["item_name"])) {
+        include_once("../include_files/db_connection.php");
+
+        extract($_POST);
+
+        $item_name = $item_name . "%"; //Math SQL LIKE syntax
+
+        $stmt = $db->prepare("SELECT * FROM TypeItem WHERE name LIKE ?");
+        $stmt->bind_param("s", $item_name);
+        $stmt->execute();
+
+        $result = $stmt ->get_result();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +41,7 @@
 <body>
     <?php include_once("../include_files/menu.php");?>
     <div id="form-container">
-        <form action="sell_item.php" method="post" enctype="multipart/form-data">
+        <form action="sell_catalog_item.php" method="post" enctype="multipart/form-data">
             <h1 id="form-title">Ajouter objet du catalogue à vendre</h1>
             <p>
                 Cette page vous permet de vendre un produit qui est déjà présent dans le catalogue. 
@@ -42,7 +56,13 @@
                 <input type="submit" value="Rechercher">
             </div>
             <?php
-                echo $message;
+                if(isset($_POST["item_name"])) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<pre>";
+                        print_r($row);
+                        echo "</pre>";
+                    }
+                }
             ?>
         </form>
     </div>

@@ -106,7 +106,7 @@
 <body>
     <?php include_once("../include_files/menu.php");?>
     <div id="form-container">
-        <form action="sell_item.php" method="post" enctype="multipart/form-data">
+        <form action="sell_new_item.php" method="post" enctype="multipart/form-data">
             <h1 id="form-title">Ajouter un nouvel objet à vendre</h1>
             <p>
                 Cette page vous permet de vendre un produit qui n'est pas présent dans le catalogue. 
