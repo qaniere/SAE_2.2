@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.1.3
--- https://www.phpmyadmin.net/
---
--- Host: db
--- Generation Time: May 23, 2022 at 07:34 PM
--- Server version: 10.7.3-MariaDB-1:10.7.3+maria~focal
--- PHP Version: 8.0.15
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -21,12 +12,6 @@ SET time_zone = "+00:00";
 -- Database: `coff_it`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Business`
---
-
 CREATE TABLE `Business` (
   `id` int(11) NOT NULL,
   `email` varchar(200) NOT NULL,
@@ -35,20 +20,6 @@ CREATE TABLE `Business` (
   `password_hash` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `Business`
---
-
-INSERT INTO `Business` (`id`, `email`, `name`, `country`, `password_hash`) VALUES
-(1, 'ecologic@gmail.com', 'Ecologic', 'France', 'x'),
-(2, 'veolia@gmail.com', 'Veolia', 'France', 'y'),
-(3, 'yes@gmail.com', 'yes yes', 'France', 'z');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `BusinessBuy`
---
 
 CREATE TABLE `BusinessBuy` (
   `business` int(11) NOT NULL,
@@ -57,18 +28,6 @@ CREATE TABLE `BusinessBuy` (
   `price` int(11) NOT NULL COMMENT 'price per unit in euros'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='The business wants to buy quantity of item at unit price';
 
---
--- Dumping data for table `BusinessBuy`
---
-
-INSERT INTO `BusinessBuy` (`business`, `typeItem`, `quantity`, `price`) VALUES
-(3, 1, 38, 20);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `BusinessSell`
---
 
 CREATE TABLE `BusinessSell` (
   `business` int(11) NOT NULL,
@@ -77,18 +36,6 @@ CREATE TABLE `BusinessSell` (
   `price` int(11) NOT NULL COMMENT 'price per unit'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='the business wants to sell quantity of item at unit price';
 
---
--- Dumping data for table `BusinessSell`
---
-
-INSERT INTO `BusinessSell` (`business`, `typeItem`, `quantity`, `price`) VALUES
-(3, 1, 42, 65);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Customer`
---
 
 CREATE TABLE `Customer` (
   `id` bigint(20) NOT NULL,
@@ -97,19 +44,6 @@ CREATE TABLE `Customer` (
   `stash` smallint(6) NOT NULL COMMENT 'no more than 65000 euros'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `Customer`
---
-
-INSERT INTO `Customer` (`id`, `login`, `stash`) VALUES
-(1, 'golgot77', 42),
-(2, 'JeanMi91', 33);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `CustomerExtraction`
---
 
 CREATE TABLE `CustomerExtraction` (
   `Customer` bigint(20) NOT NULL,
@@ -117,18 +51,6 @@ CREATE TABLE `CustomerExtraction` (
   `quantity` int(11) NOT NULL COMMENT 'in mg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `CustomerExtraction`
---
-
-INSERT INTO `CustomerExtraction` (`Customer`, `element`, `quantity`) VALUES
-(1, 13, 25000),
-(1, 79, 340);
-
--- --------------------------------------------------------
---
--- Table structure for table `CustomerProtectedData`
---
 
 CREATE TABLE `CustomerProtectedData` (
   `id` bigint(20) NOT NULL,
@@ -137,19 +59,6 @@ CREATE TABLE `CustomerProtectedData` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'can not be shared between accounts'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `CustomerProtectedData`
---
-
-INSERT INTO `CustomerProtectedData` (`id`, `surname`, `firstname`, `email`) VALUES
-(1, 'Tartenpion', 'Cunégonde', 'cunegonde.tartenpion@toto.fr'),
-(2, 'Erraj', 'Jean-Michel', 'synthe@cool.fr');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ExtractionFromTypeItem`
---
 
 CREATE TABLE `ExtractionFromTypeItem` (
   `typeItem` int(11) NOT NULL,
@@ -157,23 +66,6 @@ CREATE TABLE `ExtractionFromTypeItem` (
   `quantity` int(11) NOT NULL COMMENT 'mg (thousandth of a gram)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `ExtractionFromTypeItem`
---
-
-INSERT INTO `ExtractionFromTypeItem` (`typeItem`, `element`, `quantity`) VALUES
-(1, 13, 25000),
-(1, 29, 15000),
-(1, 46, 15),
-(1, 47, 340),
-(1, 78, 1),
-(1, 79, 34);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Mendeleiev`
---
 
 CREATE TABLE `Mendeleiev` (
   `Z` int(11) NOT NULL,
@@ -181,9 +73,6 @@ CREATE TABLE `Mendeleiev` (
   `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `Mendeleiev`
---
 
 INSERT INTO `Mendeleiev` (`Z`, `symbol`, `name`) VALUES
 (13, 'Al', 'Aluminium'),
@@ -193,19 +82,14 @@ INSERT INTO `Mendeleiev` (`Z`, `symbol`, `name`) VALUES
 (46, 'Pd', 'Paladium'),
 (47, 'Ag', 'Silver'),
 (57, 'La', 'Lanthanum'),
-(59, 'Pr', 'praseodymium'),
-(60, 'Nd', 'neodymium'),
-(64, 'Gd', 'gadolinium'),
-(65, 'Tb', 'terbium'),
+(59, 'Pr', 'Praseodymium'),
+(60, 'Nd', 'Neodymium'),
+(64, 'Gd', 'Gadolinium'),
+(65, 'Tb', 'Terbium'),
 (77, 'Ir', 'Iridium'),
 (78, 'Pt', 'Platinum'),
-(79, 'Au', 'gold');
+(79, 'Au', 'Gold');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `TypeItem`
---
 
 CREATE TABLE `TypeItem` (
   `id` int(11) NOT NULL,
@@ -213,15 +97,6 @@ CREATE TABLE `TypeItem` (
   `file_extension` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `TypeItem`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `TypeItemDetails`
---
 
 CREATE TABLE `TypeItemDetails` (
   `typeItem` int(11) NOT NULL,
@@ -229,18 +104,6 @@ CREATE TABLE `TypeItemDetails` (
   `value` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `TypeItemDetails`
---
-
-INSERT INTO `TypeItemDetails` (`typeItem`, `attribute`, `value`) VALUES
-(1, 'main camera', '8 Mpx'),
-(1, 'screen', '4 in, 1136 × 640 '),
-(1, 'second camera', '1.2 Mpx');
-
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `Business`
@@ -312,31 +175,6 @@ ALTER TABLE `TypeItem`
 ALTER TABLE `TypeItemDetails`
   ADD PRIMARY KEY (`typeItem`,`attribute`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `Business`
---
-ALTER TABLE `Business`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `Customer`
---
-ALTER TABLE `Customer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `TypeItem`
---
-ALTER TABLE `TypeItem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Constraints for dumped tables
---
 
 --
 -- Constraints for table `BusinessBuy`
