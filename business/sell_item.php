@@ -14,25 +14,46 @@
 
     extract($_SESSION);
 
-    // var_dump($_POST);
-    // echo "<br> <br> <br> <br> <br>";
-    // var_dump($_FILES);
-
-    // echo "<br> <br> <br> <br> <br>";
-    if(isset($_POST["item-name"]) && isset($_POST["specs"]) && isset($_POST["price"]) && isset($_POST["quantity"]) && isset($_FILES["image"])) {
+    if(isset($_POST["item_name"]) && isset($_POST["specs"]) && isset($_POST["price"]) && isset($_POST["quantity"]) && isset($_FILES["image"])) {
     //Form is complete
 
+        include_once("../include_files/db_connection.php");
         extract($_POST);
 
-        //Check if item doest no exist
+        $stmt = $db->prepare("SELECT * FROM TypeItem WHERE name = ?");
+        $stmt->bind_param("s", $item_name);
+        $stmt->execute();
 
-        //Insert into "Items"
+        $result = $stmt ->get_result() ->fetch_assoc();
 
-        // $specs_lines = explode("\n", $specs);
-        // foreach($specs_lines as $line) {
-        //     echo $line;
-        //     echo "<br>";
-        // }
+        if($result) {
+            $message = "<strong>Cet objet existe déjà dans le catalogue</strong>";
+
+        } else {
+            //Insert the name in the first table and get an item id from the databse
+            $stmt = $db->prepare("INSERT INTO TypeItem (name) VALUES (?)");
+            $stmt->bind_param("s", $item_name);
+            $stmt->execute();
+
+            $item_id = $stmt->insert_id;
+
+            //Insert the spec into the second table
+            $stmt = $db->prepare("INSERT INTO TypeItemDetails (typeItem, attribute, value) VALUES (?, ?, ?)");
+            $specs_lines = explode("\n", $specs);
+
+            foreach($specs_lines as $line) {
+                $specs_array = explode("=", $line);
+                $stmt->bind_param("iss", $item_id, $specs_array[0], $specs_array[1]);
+                $stmt->execute();
+            }
+
+            //Insert the offer in the third table
+            $stmt = $db->prepare("INSERT INTO BusinessSell (business, typeItem, price, quantity) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("iiii", $id, $item_id, $price, $quantity);
+            $stmt->execute();
+        }
+
+        
     }
 
 ?>
@@ -54,7 +75,7 @@
             <div class="form-question">
                 <label for="item-name"><strong>Nom de l'objet</strong></label>
                 <br>
-                <input type="text" name="item-name" id="item-name" required>
+                <input type="text" name="item_name" id="item_name" required>
             </div>
             <div class="form-question">
                 <label for="specs"><strong>Caractéristiques</strong></label>
@@ -80,6 +101,9 @@
             <div class="form-question">
                 <input type="submit" value="Ajouter">
             </div>
+            <?php
+                echo $message;
+            ?>
         </form>
     </div>
 </body>
