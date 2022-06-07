@@ -3,9 +3,9 @@
     
     if (isset($_SESSION["cart"]) && isset($_SESSION["cart"][$_POST["productID"]]) && isset($_POST["quantity"])) {
         if ($_POST["quantity"] > 0) {
-            $_SESSION["cart"][$_POST["productID"]] = $_POST["quantity"];
+            $_SESSION["cart"][$_POST["productID"]][$_POST['businessID']] = $_POST["quantity"];
         } else {
-            unset($_SESSION["cart"][$_POST["productID"]]);
+            unset($_SESSION["cart"][$_POST["productID"]][$_POST['businessID']]);
         }
     }
 

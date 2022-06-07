@@ -6,15 +6,20 @@
         header("Location: ../common/login.php");
     } else {
         
-        foreach ($_SESSION['cart'] as $key => $value) {
-            $stmt = $db->prepare("INSERT INTO CustomerOrder (CustomerID, ItemID, quantity) VALUES (?, ?, ?)");
-            $stmt ->bind_param("iii", $_SESSION['id'], $key, $value);
-            $stmt ->execute();
+        foreach ($_SESSION['cart'] as $id => $businessID) {
+            foreach ($businessID as $quantity) {
+                $bID =  array_search($quantity, $businessID);
+                $stmt = $db->prepare("INSERT INTO CustomerOrder (CustomerID, ItemID, BusinessID, quantity) VALUES (?, ?, ?, ?)");
+                $stmt ->bind_param("iiii", $_SESSION['id'], $id, $bID, $quantity);
+                $stmt ->execute();
 
-            $stmt = $db->prepare("UPDATE BusinessSell SET Quantity = Quantity - ? WHERE typeItem = ?");
-            $stmt ->bind_param("ii", $value, $key);
-            $stmt ->execute();
+                $stmt = $db->prepare("UPDATE BusinessSell SET quantity = quantity - ? WHERE typeItem = ? AND business = ?");
+                $stmt ->bind_param("iii", $quantity, $id, $bID);
+                $stmt ->execute();
+            }
+            
         }
+        unset($_SESSION['cart']);
     }
 ?>
 

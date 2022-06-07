@@ -21,13 +21,19 @@
 
             if (isset($_SESSION["cart"]) && is_array($_SESSION["cart"])) {
                 if (array_key_exists($id, $_SESSION["cart"])) {
-                    $_SESSION["cart"][$id] += $nbArticles;
+                    foreach ($_SESSION['cart'][$id] as $key => $value) {
+                        if ($key == $businessID) {
+                            $_SESSION['cart'][$id][$key] += $nbArticles;
+                            break;
+                        }
+                    }
+                    
                 } else {
-                    $_SESSION["cart"][$id] = $nbArticles;
+                    $_SESSION["cart"][$id][$businessID] = $nbArticles;
                 }
 
             } else {
-                $_SESSION["cart"] = array($id => $nbArticles);
+                $_SESSION["cart"] = array($id => array($businessID => $nbArticles));
             }
             if (isset($_SERVER["HTTP_REFERER"])) {
                 header("Location: " . $_SERVER["HTTP_REFERER"]);
