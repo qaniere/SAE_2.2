@@ -1,0 +1,16 @@
+#content {
+    margin: 2em;
+}
+
+#item-picture {
+    height: 25em;
+    width: 25em;
+}
+
+@media screen and (max-width: 1024px) {
+
+    #item-picture {
+        height: 20em;
+        width: 20em;
+    }
+}
