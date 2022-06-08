@@ -2,7 +2,7 @@
     session_start();
     
     if (!isset($_SESSION['login'])) {
-        header("Location: ../customer/login.php");
+        header("Location: ../common/login.php");
         
     } else {
 
