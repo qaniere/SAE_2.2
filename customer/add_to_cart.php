@@ -17,7 +17,7 @@
         if($row) {
             $price = $row["price"];
             $total = $price * $nbArticles;
-            echo "Vous avez choisi $nbArticles articles pour $total €";
+            // echo "Vous avez choisi $nbArticles articles pour $total €";
 
             if (isset($_SESSION["cart"]) && is_array($_SESSION["cart"])) {
                 if (array_key_exists($id, $_SESSION["cart"])) {

@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre panier - Coff-IT</title>
-    <link rel="stylesheet" href="../style/basic.css">
-</head>
-<body>
-    
 <?php
     session_start();
     include_once("../include_files/menu.php");
@@ -38,6 +27,16 @@
         $total += $row["price"] * $nbArticles;
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre panier - Coff-IT</title>
+    <link rel="stylesheet" href="../style/basic.css">
+</head>
+<body>
 <form action="../customer/remove_from_cart.php" method="post">
     <input type="hidden" name="productID" value=<?=$id?>>
     <button type="submit"> 🗑️ Retirer du panier</button>
