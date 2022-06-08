@@ -18,12 +18,13 @@
     //Select all items in the cart
     foreach ($_SESSION["cart"] as $id => $businessID) {
         foreach ($businessID as $nbArticles) {
-            echo "<img src='../uploaded_files/" . $id . ".jpg' height='400'><br>";
-            $stmt = $db -> prepare("SELECT name, price, quantity FROM TypeItem JOIN BusinessSell ON BusinessSell.typeItem = TypeItem.id WHERE id = ?");
+            $stmt = $db -> prepare("SELECT name, price, quantity, file_extension FROM TypeItem JOIN BusinessSell ON BusinessSell.typeItem = TypeItem.id WHERE id = ?");
             $stmt -> bind_param("i",$id);
             $stmt -> execute();
             $result = $stmt -> get_result();
             $row = $result -> fetch_assoc();
+
+            echo "<img src='../catalog_pictures/" . $id . "." . $row["file_extension"] . "' height='400'><br>";
             echo $row["name"];
 ?>
         <form action="../customer/update_cart.php" method="POST">

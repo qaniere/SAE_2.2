@@ -8,7 +8,7 @@
         $nbArticles = $_POST["item-number"];
         $businessID = $_POST["businessID"];
 
-        $stmt = $db -> prepare("SELECT price FROM TypeItem,BusinessSell WHERE TypeItem.id = ? AND TypeItem.id = typeItem AND BusinessSell.business = ?");
+        $stmt = $db -> prepare("SELECT TypeItem.*, price FROM BusinessSell LEFT JOIN TypeItem ON TypeItem.id = BusinessSell.typeItem WHERE TypeItem.id = ? AND BusinessSell.business = ?");
         $stmt -> bind_param("ii",$id,$businessID);
         $stmt -> execute();
         $result = $stmt -> get_result();

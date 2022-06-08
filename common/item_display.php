@@ -18,12 +18,14 @@
     }
 
    //Get the item's name, his price, the quantity available and the vendors
-    $stmt = $db -> prepare("SELECT TypeItem.name AS ItemName, price, quantity, Business.name AS BusinessName FROM TypeItem,BusinessSell,Business WHERE TypeItem.id = ? AND TypeItem.id = typeItem AND Business.id = BusinessSell.business");
+    $stmt = $db -> prepare("SELECT TypeItem.name AS ItemName, TypeItem.file_extension, price, quantity, Business.name AS BusinessName FROM TypeItem,BusinessSell,Business WHERE TypeItem.id = ? AND TypeItem.id = typeItem AND Business.id = BusinessSell.business");
     $stmt -> bind_param("i",$id);
     $stmt -> execute();
 
     $result = $stmt -> get_result();
     $row = $result -> fetch_assoc();
+
+    $file_extension = $row["file_extension"];
     
     $name = $row["ItemName"];
     echo "$name<br><br>";
@@ -44,7 +46,7 @@
     }
 
     //Item picture
-    echo "<img src='../uploaded_files/" . $id . ".jpg' height='400'><br>";
+    echo "<img src='../catalog_pictures/" . $id . "." . $file_extension . "' height='400'><br>";
     
     //Display each attributes of the item.
     $stmt = $db -> prepare("SELECT attribute,value FROM TypeItemDetails WHERE typeItem = ?");
