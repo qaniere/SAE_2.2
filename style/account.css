@@ -1,0 +1,19 @@
+table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+
+#account-container {
+    margin: 1em;
+}
+
+
+.history-image {
+    height: 6em;
+}
