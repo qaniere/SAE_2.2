@@ -19,7 +19,7 @@
         <?php
             include_once("../include_files/db_connection.php");
 
-            $stmt = $db->prepare("SELECT * FROM TypeItem ORDER BY id");
+            $stmt = $db->prepare("SELECT *, quantity FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE BusinessSell.quantity > 0 ORDER BY id");
             $stmt -> execute();
             $result = $stmt->get_result();
 
