@@ -26,7 +26,7 @@
             $row = $result -> fetch_assoc();
             echo $row["name"];
 ?>
-        <form action="../common/update_cart.php" method="POST">
+        <form action="../customer/update_cart.php" method="POST">
             <input type="number" name="quantity" min=0 max=<?=$row['quantity']?> value="<?=$nbArticles?>">
             <input type="hidden" name="productID" value="<?=$id?>">
             <input type="hidden" name="businessID" value="<?=$businessID?>">
@@ -37,7 +37,7 @@
         $total += $row["price"] * $nbArticles;
 
 ?>
-<form action="../common/remove_from_cart.php" method="post">
+<form action="../customer/remove_from_cart.php" method="post">
     <input type="hidden" name="productID" value=<?=$id?>>
     <button type="submit"> 🗑️ Retirer du panier</button>
 </form>
@@ -48,6 +48,6 @@
 ?>
 <br>
 <h2>Total : <?=$total?>€ </h2>
-<form action="../common/checkout.php" method="post">
+<form action="../customer/checkout.php" method="post">
     <button type="submit">Passer la commande</button>
 </form>

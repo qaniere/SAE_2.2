@@ -67,7 +67,7 @@
 
 <!-- an form to order an item -->
 <br>
-<form action="../common/add_to_cart.php" method="POST">
+<form action="../customer/add_to_cart.php" method="POST">
     <label for="">Nombre d'articles : </label>
     <input type="number" value="1" min="1" max=<?=$max_quantity?> name="item-number">
     <input type="hidden" name="productID" value=<?=$id?>>

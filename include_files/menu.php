@@ -20,7 +20,7 @@
             <a href="">Notre équipe</a>
         </div>
         <div class="menu-item" role="menuitem">
-            <a href="../common/cart.php">Panier</a>
+            <a href="../customer/cart.php">Panier</a>
         </div>
         <div class="menu-item" role="menuitem">
             <a href="../common/disconnect.php">Déconnexion</a>
