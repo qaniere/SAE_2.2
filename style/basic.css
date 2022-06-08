@@ -14,3 +14,7 @@ input[type ="text"], input[type ="email"], input[type ="password"] {
 button {
     padding: 5px;
 }
+
+#mobile-menu-icon {
+    display: none;
+}
