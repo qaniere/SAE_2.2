@@ -52,6 +52,16 @@ CREATE TABLE `CustomerExtraction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+CREATE TABLE `CustomerOrder` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `customerID` bigint(20) NOT NULL,
+  `itemID` int(11) NOT NULL,
+  `businessID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 CREATE TABLE `CustomerProtectedData` (
   `id` bigint(20) NOT NULL,
   `surname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
