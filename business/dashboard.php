@@ -29,7 +29,7 @@
     <div id="content">         
         <h1>Tableau de bord</h1>
         <?php echo "<p>Vous êtes connecté au nom de l'entreprise <strong>" . $_SESSION["name"] . "</strong></p>"; ?>
-        <p> Vos dernières ventes : </p>
+        <p> Vos dernières 5 dernières ventes : </p>
         <table>
             <tr>
                 <td><strong>Nom produit</produit></td>
@@ -37,7 +37,25 @@
                 <td><strong>Client</produit></td>
                 <td><strong>Date et heure</produit></td>
             </tr>
-        </table>
+        <?php
+        include_once("../include_files/db_connection.php");
+        $stmt = $db->prepare("SELECT DISTINCT CustomerOrder.quantity, CustomerOrder.date, TypeItem.name, CustomerProtectedData.firstname, CustomerProtectedData.surname FROM CustomerOrder JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id JOIN CustomerProtectedData ON CustomerOrder.customerID = CustomerProtectedData.id WHERE businessID = ? ORDER BY CustomerOrder.date DESC LIMIT 5");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td>" . $row["quantity"] . "</td>";
+            echo "<td>" . $row["firstname"] . " " . $row["surname"]  . "</td>";
+            echo "<td>" . $row["date"] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+
+        ?>
         <h2>Actions</h2>
         <h3>Vendre un objet</h3>
         <ul>
