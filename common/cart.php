@@ -14,6 +14,8 @@
     include_once("../include_files/menu.php");
     include_once("../include_files/db_connection.php");
     $total = 0;
+
+    //Select all items in the cart
     foreach ($_SESSION["cart"] as $id => $businessID) {
         foreach ($businessID as $nbArticles) {
             echo "<img src='../uploaded_files/" . $id . ".jpg' height='400'><br>";

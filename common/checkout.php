@@ -5,7 +5,7 @@
     if (!isset($_SESSION['login'])) {
         header("Location: ../common/login.php");
     } else {
-        
+        //Select all items in the cart and update the database
         foreach ($_SESSION['cart'] as $id => $businessID) {
             foreach ($businessID as $quantity) {
                 $bID =  array_search($quantity, $businessID);
@@ -19,6 +19,8 @@
             }
             
         }
+
+        //Empty the cart
         unset($_SESSION['cart']);
     }
 ?>
