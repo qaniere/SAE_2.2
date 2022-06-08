@@ -1,6 +1,6 @@
 table {
-    border-collapse: collapse;
     margin-bottom: 10px;
+    border-collapse: collapse;
 }
 
 th, td {
@@ -11,6 +11,10 @@ th, td {
 
 #account-container {
     margin: 1em;
+}
+
+#history-container {
+    overflow: scroll;
 }
 
 

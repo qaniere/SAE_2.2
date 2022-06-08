@@ -77,16 +77,19 @@
                 
                 //Getting the order history
                 echo "<h3>Historique des achats</h3>";
+                echo "<div id='history-container'>";
                 echo "<table>";
                 echo "<tr>";
                 echo "<th>Numéro de commande</th>";
                 echo "<th>Nom de l'objet</th>";
+                echo "<th>Quantité</th>";
                 echo "<th>Vendeur</th>";
                 echo "<th>Photo</th>";
                 echo "<th>Lien vers l'article</th>";
+                echo "<th>Date et heure de la commande</th>";
                 echo "</tr>";
 
-                $stmt = $db->prepare("SELECT CustomerOrder.id AS OrderID, TypeItem.id AS id, TypeItem.name AS itemName, TypeItem.file_extension AS file_extension, Business.name AS businessName, CustomerOrder.quantity, price FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ? LIMIT 10 OFFSET ?");
+                $stmt = $db->prepare("SELECT CustomerOrder.id AS OrderID, TypeItem.id AS id, TypeItem.name AS itemName, TypeItem.file_extension AS file_extension, Business.name AS businessName, CustomerOrder.quantity, price, CustomerOrder.date FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ? LIMIT 10 OFFSET ?");
                 $stmt->bind_param("ii", $_SESSION["id"], $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -99,17 +102,21 @@
                     $price = $row["price"]*$quantity;
                     $id = $row["id"];
                     $file_extension = $row["file_extension"];
+                    $date =$row["date"];
 
                     echo "<tr>";
                     echo "<td>$order_id</td>";
                     echo "<td>$item_name</td>";
+                    echo "<td>$quantity</td>";
                     echo "<td>$business_name</td>";
                     echo "<td><img class='history-image'src='../catalog_pictures/$id.$file_extension'></td>";
                     echo "<td><a href='../common/item_display.php?item=$id'>Voir l'article</a></td>";
+                    echo "<td>$date</td>";
                     echo "</tr>";
                 }
 
                 echo "</table>";
+                echo "</div>";
           
                 echo "<form action='../customer/account.php' method='get'>
                     <button type='submit' name='history' value='previous'>< Page précédente</button>
