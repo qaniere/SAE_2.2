@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +11,7 @@
     <link rel="stylesheet" href="../style/basic.css">
 </head>
 <body>
-    
 <?php
-
-    session_start();
     include_once("../include_files/menu.php");
     include_once("../include_files/db_connection.php");
     $total = 0;
