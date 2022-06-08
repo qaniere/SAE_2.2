@@ -13,25 +13,31 @@
 </head>
 <body>
     <?php include_once("../include_files/menu.php");?>
-    <form action="./item_display.php" method="GET">
     <h1>Catalogue</h1>
     <div class="container">
         <?php
             include_once("../include_files/db_connection.php");
 
-            $stmt = $db->prepare("SELECT *, quantity FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE BusinessSell.quantity > 0 ORDER BY id");
+            $stmt = $db->prepare("SELECT *, price, quantity FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE BusinessSell.quantity > 0 ORDER BY id");
             $stmt -> execute();
             $result = $stmt->get_result();
 
             while($row = $result->fetch_assoc()) {
                 $item = $row["name"];
+                $price = $row["price"];
+
+                echo "<a href='../common/item_display.php?item=". $row['id']. "'>";
                 echo "<div class='article'>";
-                echo "<div class='item'><h3>$item</h3></div>";
-                echo "<div class='item'><a href='../common/item_display.php?item=". $row['id']. "'><img src='../catalog_pictures/" . $row["id"] . "." .  $row["file_extension"] . "' width='300'></a></div>";
+                echo "<div class='article-text'><img class='article-picture' src='../catalog_pictures/" . $row["id"] . "." .  $row["file_extension"] . "' width='300'></div>";
+                echo "<div class='article-tex'><h3>$item</h3><h3>$price €</div>";
                 echo "</div>";
+                echo "</a>";
+            }
+
+            if($result->num_rows == 0) {
+                echo "Oups, aucun article n'est disponible pour le moment :(";
             }
         ?>
     </div>
-    </form>
 </body>
 </html>
