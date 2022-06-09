@@ -53,6 +53,10 @@
                 echo "Erreur l'objet que vous avez choisi n'est pas disponible actuellment";
             }
             
+        } 
+
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
         }
     }
 ?>
