@@ -112,7 +112,13 @@
             <?php
                 echo $message;
             ?>
-            <p> Cette page d'inscription est réservée aux partucliers. Vous êtes une entreprise ? <a href="../business/register.php">Cliquez ici</a> </p>
+            <p>
+                Cette page d'inscription est réservée aux partucliers. Vous êtes une entreprise ? <a href="../business/register.php">Cliquez ici</a>
+            </p>
+            <br>
+            <p>
+                Vous avez déjà un compte ? <a href="../common/login.php">Cliquez ici</a>
+            </p>
         </form>
     </div>
 </body>

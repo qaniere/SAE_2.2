@@ -99,7 +99,13 @@
             <?php
                 echo $message;
             ?>
-            <p> Cette page d'inscription est réservée aux entreprise. Vous êtes un particulier ? <a href="../customer/register.php">Cliquez ici</a> </p>
+            <p> 
+                Cette page d'inscription est réservée aux entreprise. Vous êtes un particulier ? <a href="../customer/register.php">Cliquez ici</a>
+            </p>
+            <br>
+            <p>
+                Vous avez déjà un compte ? <a href="../common/login.php">Cliquez ici</a>
+            </p>
         </form>
     </div>
 </body>
