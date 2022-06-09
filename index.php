@@ -60,6 +60,18 @@
                 </div>
             </p>
         </div>
+        <div id="presentation-block">
+            <h2>Comment ça marche ?</h2>
+            <p>
+                Lyft hell of humblebrag organic shaman authentic, 
+                selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
+                Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
+                gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
+                four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
+                book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
+                kinfolk slow-carb migas cold-pressed ennui.
+            </p>
+        </div>
         <h3>Des offres pour les particuliers mais aussi pour les entreprises !</h3>
         <div id="customer-block-container">
             <div class="customer-block">
@@ -96,7 +108,19 @@
                     </div> 
                 </p>
             </div>
-        </div>       
+        </div>  
+        <div id="presentation-block">
+            <h2>Coff-IT c'est...</h2>
+            <p>
+                Lyft hell of humblebrag organic shaman authentic, 
+                selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
+                Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
+                gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
+                four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
+                book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
+                kinfolk slow-carb migas cold-pressed ennui.
+            </p>
+        </div>     
     </div>
     <script src="./scripts/index.js"></script>
 </body>
