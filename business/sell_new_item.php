@@ -46,6 +46,9 @@
             if($error) {
                 $message = "<strong>Format des caractéristiques incorrect !</strong>";
 
+            } else if ($price < 0 || $quantity < 0) {
+                $message = "<strong>Les prix et quantités doivent être positifs !</strong>";
+
             } else {
 
                 //Get the file exentension of the image
