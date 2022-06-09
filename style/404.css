@@ -2,16 +2,16 @@ h1 {
     font-size: 65px;
 }
 
-p, a {
+.text-container > p, .text-container > a {
     font-size: 20px;
 }
 
-a {
+.text-container >a {
     color: black;
     text-decoration: none;
 }
 
-a:hover {
+.text-container > a:hover {
     text-decoration: underline;
 }
 
