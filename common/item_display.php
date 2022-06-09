@@ -123,6 +123,6 @@ session_start();
         ?>
         <input type="hidden" name="businessID" value=<?=$row['businessID']?>>
         <br>
-        <button type="submit">Ajouter au panier</button>
+        <button type="submit">🛒 Ajouter au panier</button>
     </div>
 </form>
