@@ -15,7 +15,6 @@
     extract($_SESSION);
 
     if(isset($_POST["item_name"])) {
-        echo "la";
         include_once("../include_files/db_connection.php");
 
         extract($_POST);
