@@ -1,8 +1,15 @@
 <?php
     session_start();
-    include_once("../include_files/db_connection.php");
+
+    if(!isset($_SESSION["id"])) {
+        header("Location: ../common/login.php");
+        exit;
+    }
     
-    if ($_SESSION['account_type'] != "business") {
+    
+    if ($_SESSION["account_type"] != "business") {
+        include_once("../include_files/db_connection.php");
+
         if(isset($_POST["productID"],$_POST["item-number"])) {
 
             $id = $_POST["productID"];
