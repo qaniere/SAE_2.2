@@ -11,28 +11,31 @@
             <a href="../common/catalog.php">Catalogue</a>
         </div>
         <?php 
-        if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer") {
+        //$logout is a variable set on "disconnect.php" only. So, if the user
+        //is disconnecting, connected only action will not be displayed.
+
+        if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer" && !isset($logout)) {
             echo "<div class='menu-item' role='menuitem'>
                 <a href='../customer/cart.php'>Panier</a>
             </div>";
         }
         ?>
         <?php
-        if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer") {
+        if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer" && !isset($logout)) {
             echo "<div class='menu-item' role='menuitem'>
                 <a href='../customer/account.php'>Mon compte</a>
             </div>";
         }
         ?>
         <?php 
-        if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "business") {
+        if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "business" && !isset($logout)) {
             echo "<div class='menu-item' role='menuitem'>
                 <a href='../business/dashboard.php'>Tableau de bord</a>
             </div>";
         }
         ?>
         <?php 
-        if(isset($_SESSION["id"])) {
+        if(isset($_SESSION["id"]) && !isset($logout)) {
             echo "<div class='menu-item' role='menuitem'>
             <a href='../common/disconnect.php'>Déconnexion</a>
             </div>";
@@ -41,11 +44,12 @@
         <div id="account-pill">
             <img id="user-logo" src="../img/user.png">
             <?php
-                if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer" && basename(__FILE__) != "disconnect.php") {
+                basename(__FILE__);
+                if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "customer" && !isset($logout)) {
                     $name = $_SESSION["firstname"];
                     echo "<a href='../customer/account.php'>Bonjour $name !</a>";
 
-                } else if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "business" && basename(__FILE__) != "disconnect.php") {
+                } else if(isset($_SESSION["id"]) && $_SESSION["account_type"] == "business" && !isset($logout)) {
                     $name = $_SESSION["name"];
                     echo "<a href='../business/dashboard.php'>Bonjour $name !</a>";
 
