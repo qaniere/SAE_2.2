@@ -18,7 +18,7 @@
         <?php
             include_once("../include_files/db_connection.php");
 
-            $stmt = $db->prepare("SELECT *, price, quantity FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE BusinessSell.quantity > 0 ORDER BY id");
+            $stmt = $db->prepare("SELECT *, TypeItem.name, BusinessSell.price FROM BusinessSell JOIN TypeItem ON BusinessSell.typeItem = TypeItem.id WHERE (typeItem, price) IN (SELECT typeItem, MIN(price) FROM BusinessSell WHERE BusinessSell.quantity > 0 GROUP BY typeItem);");
             $stmt -> execute();
             $result = $stmt->get_result();
 

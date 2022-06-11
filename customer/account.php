@@ -1,5 +1,15 @@
 <?php
     session_start();
+
+    if(!isset($_SESSION["id"])){
+        header("Location: ../common/login.php");
+        exit();
+    }
+
+    if($_SESSION["account_type"] == "business") {
+        header("Location: ../business/dashboard.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,28 +62,35 @@
                 }
 
                 //Get number of order of the customer
-                $stmt = $db -> prepare("SELECT COUNT(id) FROM CustomerOrder WHERE CustomerID = ?");
+                $stmt = $db -> prepare("SELECT COUNT(id) AS OrderCount FROM CustomerOrder WHERE CustomerID = ?");
                 $stmt -> bind_param("i", $_SESSION["id"]);
                 $stmt -> execute();
                 $result = $stmt -> get_result();
                 $row = $result -> fetch_assoc();
-                $max = $row["COUNT(id)"]/10 % 10;
+                $max = $row["OrderCount"];
 
                 //Setting the offset for pagination
-                $offset = 0;
-                if (isset($_GET["history"])) {
+                if(!isset($_SESSION["offset"])) {
+                    $offset = 0;
 
+                } else {
+                    $offset = $_SESSION["offset"];
+                }
+
+                if (isset($_GET["history"])) {
                     if ($_GET["history"] == "previous") {
                         if ($offset != 0) {
-                            $offset -= 10;
+                            $offset -= 3;
                         }  
                     
-                    } else if ($_GET["history"] == "next") {
-                        if ($offset < $max) {
-                            $offset += 10;
-                        }
+                    } else if ($_GET["history"] == "next") {       
+                            if($offset + 3 < $max) {
+                                $offset += 3;   
+                            }
                     }
                 }
+
+                $_SESSION["offset"] = $offset;
                 
                 //Getting the order history
                 echo "<h3>Historique des achats</h3>";
@@ -89,7 +106,7 @@
                 echo "<th>Date et heure de la commande</th>";
                 echo "</tr>";
 
-                $stmt = $db->prepare("SELECT CustomerOrder.id AS OrderID, TypeItem.id AS id, TypeItem.name AS itemName, TypeItem.file_extension AS file_extension, Business.name AS businessName, CustomerOrder.quantity, price, CustomerOrder.date FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ? LIMIT 10 OFFSET ?");
+                $stmt = $db->prepare("SELECT CustomerOrder.id AS OrderID, TypeItem.id AS id, TypeItem.name AS itemName, TypeItem.file_extension AS file_extension, Business.name AS businessName, CustomerOrder.quantity, price, CustomerOrder.date FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ? LIMIT 3 OFFSET ?");
                 $stmt->bind_param("ii", $_SESSION["id"], $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -123,8 +140,6 @@
                     <button type='submit' name='history' value='next'>Page suivante ></button>
                 </form>";
 
-            } else {
-                echo "Vous n'êtes pas connecté. Allez sur <a href='login.php'>login.php</a>.";
             }
         ?>
     </div>
