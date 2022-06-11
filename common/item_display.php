@@ -27,14 +27,14 @@ session_start();
         include_once("../include_files/db_connection.php");
 
         //Check if the item exists
-        $exists = $db->query("SELECT typeItem FROM BusinessSell WHERE typeItem = $id");
+        $exists = $db->query("SELECT typeItem FROM BusinessSell WHERE typeItem = $id AND quantity > 0;");
         $row = $exists->fetch_assoc();
         if (!isset($row["typeItem"])) {
             die("Cet article n'est pas en vente actuellement.<br><a href='./catalog.php'>Retourner au catalogue</a>");
         }
 
     //Get the item's name, his price, the quantity available and the vendors
-        $stmt = $db -> prepare("SELECT TypeItem.name AS ItemName, TypeItem.file_extension, price, quantity, Business.name AS BusinessName FROM TypeItem,BusinessSell,Business WHERE TypeItem.id = ? AND TypeItem.id = typeItem AND Business.id = BusinessSell.business");
+        $stmt = $db -> prepare("SELECT TypeItem.name AS ItemName, TypeItem.file_extension, price, quantity, Business.name AS BusinessName FROM TypeItem,BusinessSell,Business WHERE TypeItem.id = ? AND TypeItem.id = typeItem AND Business.id = BusinessSell.business AND BusinessSell.quantity > 0;");
         $stmt -> bind_param("i",$id);
         $stmt -> execute();
 
@@ -103,7 +103,7 @@ session_start();
             <?php
 
                 //Display the vendors in a dropdown list to let the user to choose
-                $stmt = $db -> prepare("SELECT name FROM Business,BusinessSell WHERE BusinessSell.business = Business.id AND BusinessSell.typeItem = ?");
+                $stmt = $db -> prepare("SELECT name FROM Business,BusinessSell WHERE BusinessSell.business = Business.id AND BusinessSell.typeItem = ? AND BusinessSell.quantity > 0;");
                 $stmt -> bind_param("i",$id);
                 $stmt -> execute();
                 $result = $stmt -> get_result();
