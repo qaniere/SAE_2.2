@@ -1,4 +1,5 @@
 table {
+    margin-bottom: 1em;
     overflow-y: scroll;
     border-collapse: collapse;
 }
@@ -13,3 +14,9 @@ td {
     margin: 2em;
 }
 
+
+@media screen and (max-width: 1024px) {
+    table, td, #content {
+        overflow: scroll;
+    }
+}

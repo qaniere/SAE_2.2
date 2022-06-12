@@ -51,7 +51,7 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
         echo "<h1>Vos offres</h1>";
         include_once("../include_files/db_connection.php");
 
-        $stmt = $db->prepare("SELECT TypeItem.*, BusinessSell.*, COUNT(CustomerOrder.itemID) AS sales FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem JOIN CustomerOrder ON CustomerOrder.itemID = TypeItem.id WHERE BusinessSell.business = ? GROUP BY CustomerOrder.itemID");
+        $stmt = $db->prepare("SELECT TypeItem.*, BusinessSell.* FROM BusinessSell LEFT JOIN TypeItem ON TypeItem.id = BusinessSell.typeItem WHERE BusinessSell.business = ?");
         $stmt->bind_param("i", $_SESSION["id"]);
         $stmt->execute();
 
@@ -66,15 +66,29 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
         echo "<td><strong>Action</strong></td>";
         echo "</tr>";
 
+        $stmt_sales = $db->prepare("SELECT COUNT(*) AS sales FROM CustomerOrder WHERE itemID = ? AND BusinessID = ?");
+        
         while($row = $result->fetch_assoc()) {
+
+            $stmt_sales->bind_param("ii", $row["id"], $_SESSION["id"]);
+            $stmt_sales->execute();
+
+            $result_sales = $stmt_sales->get_result();
+            $row_sales = $result_sales->fetch_assoc();
+
             echo "<tr>";
             echo "<td>" . $row["name"] . "</td>";
             echo "<td>" . $row["price"] . "€</td>";
             echo "<td>" . $row["quantity"] . "</td>";
-            echo "<td>" . $row["sales"] . "</td>";
-            echo "<td><a class='link'href='manage_items.php?item_id=" . $row["id"] . "'>Modifier</a></td>";
+            echo "<td>" . $row_sales["sales"] . "</td>";
+            echo "<td><a class='link'href='manage_items.php?item_id=" . $row["id"] . "'>Modifier</a>";
+            echo "   <a class='link'href='../common/item_display.php?item=" . $row["id"] . "'>Voir dans le catalogue</a></td>";
             echo "</div>";
         }
+
+        echo "</table>";
+
+        echo "<a class='link' href='dashboard.php'>Retourner au tableau de bord</a>";
 
         echo $messsage;
 
