@@ -30,7 +30,7 @@ session_start();
         $exists = $db->query("SELECT typeItem FROM BusinessSell WHERE typeItem = $id AND quantity > 0;");
         $row = $exists->fetch_assoc();
         if (!isset($row["typeItem"])) {
-            die("Cet article n'est pas en vente actuellement.<br><a href='./catalog.php'>Retourner au catalogue</a>");
+            die("Cet article n'est pas en vente actuellement.<br><a class='link' href='./catalog.php'>Retourner au catalogue</a>");
         }
 
     //Get the item's name, his price, the quantity available and the vendors

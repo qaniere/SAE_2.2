@@ -57,6 +57,10 @@
 
         ?>
         <h2>Actions</h2>
+        <h3>Gèrer les offres</h3>
+        <ul>
+            <li><a class="link" href="../business/manage_items.php">Gérer les offres</a></li>
+        </ul>
         <h3>Vendre un objet</h3>
         <ul>
             <li><a class="link" href="./sell_new_item.php">Ajouter un produit à vendre non présent dans le catalogue</a></li>
