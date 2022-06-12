@@ -214,6 +214,14 @@ ALTER TABLE `CustomerProtectedData`
   ADD CONSTRAINT `CustomerProtectedData_ibfk_1` FOREIGN KEY (`id`) REFERENCES `Customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `CustomerProtectedData`
+--
+ALTER TABLE `CustomerOrder`
+  ADD CONSTRAINT `CustomerOrder_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `Customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `CustomerOrder_ibfk_2` FOREIGN KEY (`itemID`) REFERENCES `TypeItem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `CustomerOrder_ibfk_3` FOREIGN KEY (`businessID`) REFERENCES `Business` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `ExtractionFromTypeItem`
 --
 ALTER TABLE `ExtractionFromTypeItem`
