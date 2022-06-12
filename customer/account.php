@@ -127,7 +127,7 @@
                     echo "<td>$quantity</td>";
                     echo "<td>$business_name</td>";
                     echo "<td><img class='history-image'src='../catalog_pictures/$id.$file_extension'></td>";
-                    echo "<td><a href='../common/item_display.php?item=$id'>Voir l'article</a></td>";
+                    echo "<td><a class='link' href='../common/item_display.php?item=$id'>Voir l'article</a></td>";
                     echo "<td>$date</td>";
                     echo "</tr>";
                 }

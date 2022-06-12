@@ -120,7 +120,7 @@
             <h1 id="form-title">Ajouter un nouvel objet à vendre</h1>
             <p>
                 Cette page vous permet de vendre un produit qui n'est pas présent dans le catalogue. 
-                Si votre objet est déjà présent dans le catalogue, utilisez <a href="sell_catalog_item.php">cette page</a>
+                Si votre objet est déjà présent dans le catalogue, utilisez <a class="link" href="sell_catalog_item.php">cette page</a>
             </p>
             <div class="form-question">
                 <label for="item-name"><strong>Nom de l'objet</strong></label>

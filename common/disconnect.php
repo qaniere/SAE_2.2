@@ -23,7 +23,7 @@ $logout = true;
             <p>Vous avez été déconnecté avec succès.</p>
         </div>     
         <div class="text-container">           
-            <a href="../index.php">Retourner à l'accueil</a>
+            <a class="link" href="../index.php">Retourner à l'accueil</a>
         </div>      
     </div>
 </body>

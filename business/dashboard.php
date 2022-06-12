@@ -59,13 +59,13 @@
         <h2>Actions</h2>
         <h3>Vendre un objet</h3>
         <ul>
-            <li><a href="./sell_new_item.php">Ajouter un produit à vendre non présent dans le catalogue</a></li>
-            <li><a href="./sell_catalog_item.php">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
+            <li><a class="link" href="./sell_new_item.php">Ajouter un produit à vendre non présent dans le catalogue</a></li>
+            <li><a class="link" href="./sell_catalog_item.php">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
         </ul>
         <h3>Rechercher un objet</h3>
         <ul>
-            <li><a href="">Ajouter un produit recherché non présent dans le catalogue</a></li>
-            <li><a href="">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
+            <li><a class="link" href="">Ajouter un produit recherché non présent dans le catalogue</a></li>
+            <li><a class="link" href="">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
         </ul>
     </div>
 </html>

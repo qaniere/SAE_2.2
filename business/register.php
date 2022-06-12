@@ -100,11 +100,11 @@
                 echo $message;
             ?>
             <p> 
-                Cette page d'inscription est réservée aux entreprise. Vous êtes un particulier ? <a href="../customer/register.php">Cliquez ici</a>
+                Cette page d'inscription est réservée aux entreprise. Vous êtes un particulier ? <ac lass="link" href="../customer/register.php">Cliquez ici</a>
             </p>
             <br>
             <p>
-                Vous avez déjà un compte ? <a href="../common/login.php">Cliquez ici</a>
+                Vous avez déjà un compte ? <a class="link" href="../common/login.php">Cliquez ici</a>
             </p>
         </form>
     </div>

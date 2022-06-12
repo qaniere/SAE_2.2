@@ -58,7 +58,7 @@
                 <h1 id="form-title">Ajouter objet du catalogue à vendre</h1>            
                     <p>
                         Cette page vous permet de vendre un produit qui est déjà présent dans le catalogue. 
-                        Si votre objet n'est pas présent dans le catalogue, utilisez <a href="sell_new_item.php">cette page</a>
+                        Si votre objet n'est pas présent dans le catalogue, utilisez <a class="link" href="sell_new_item.php">cette page</a>
                     </p>
                     <div class="form-question">
                         <label for="item-name"><strong>Nom de l'objet</strong></label>
@@ -77,7 +77,7 @@
                             while($row = $result->fetch_assoc()) {
                                 $id = $row["id"];
                                 $result_item_name = $row["name"]; 
-                                echo "<a href='sell_catalog_item.php?add_item=$id'><li>$result_item_name</a></li>";
+                                echo "<a class='link' href='sell_catalog_item.php?add_item=$id'><li>$result_item_name</a></li>";
                             }
                         }
                         echo $message;

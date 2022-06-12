@@ -122,7 +122,7 @@
                 echo $message;
             ?>
             <p>
-                Pas inscrit ? Cliquez <a href="../customer/register.php">ici</a> si vous êtes un particulier et <a href="../business/register.php">ici</a> si vous êtes une entreprise.
+                Pas inscrit ? Cliquez <a class="link" href="../customer/register.php">ici</a> si vous êtes un particulier et <a class="link" href="../business/register.php">ici</a> si vous êtes une entreprise.
             </p>
             </form>
         <div>

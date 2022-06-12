@@ -21,7 +21,7 @@
             <p>La page demandée n'existe pas !</p>
         </div>     
         <div class="text-container">           
-            <a href="../index.php">Retourner à l'accueil</a>
+            <a class="link" href="../index.php">Retourner à l'accueil</a>
         </div>      
     </div>
 </body>
