@@ -75,6 +75,26 @@ session_start();
 
         echo "</ul>";
 
+        echo "<h2>Matériaux précieux contenus dans cet objet</h2>";
+        echo "<span>En achetant cet objet, vous empechez ces matériaux précieux de partir à la poubelle :</span>";
+        echo "<ul>";
+
+        $stmt_extraction = $db -> prepare("SELECT * FROM ExtractionFromTypeItem LEFT JOIN Mendeleiev ON ExtractionFromTypeItem.element = Mendeleiev.Z WHERE ExtractionFromTypeItem.typeItem = ?");
+        $stmt_extraction -> bind_param("i", $id);
+        $stmt_extraction -> execute();
+
+        $result_extraction = $stmt_extraction -> get_result();
+
+        while ($row_extraction = $result_extraction -> fetch_assoc()) {
+
+            $element = $row_extraction["name"];
+            $quantity = $row_extraction["quantity"];
+
+            echo "<li>$element : $quantity mg</li>";
+        }
+
+        echo "</ul>";
+
         //Sellers
         echo "<h2>Vendeurs</h2>";
         echo "<ul>";
