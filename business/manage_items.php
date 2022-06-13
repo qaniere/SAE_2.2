@@ -95,8 +95,8 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
     } else if(isset($_GET["item_id"])) { 
         include_once("../include_files/db_connection.php");
 
-        $stmt = $db->prepare("SELECT TypeItem.*, BusinessSell.* FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE TypeItem.id = ?");
-        $stmt->bind_param("i", $_GET["item_id"]);
+        $stmt = $db->prepare("SELECT TypeItem.*, BusinessSell.* FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE TypeItem.id = ? AND BusinessSell.business = ?");
+        $stmt->bind_param("ii", $_GET["item_id"], $_SESSION["id"]);
         $stmt->execute();
 
         $result = $stmt->get_result();
