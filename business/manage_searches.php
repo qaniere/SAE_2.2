@@ -15,19 +15,19 @@ if($_SESSION["account_type"] != "business") {
 if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"])) {
 
     if($_POST["price"] <= 0) {
-        $messsage = "Le prix doit être supérieur à 0";
+        $messsage = "Le prix doit être supérieur à 0.";
 
     } else if($_POST["quantity"] <= 0) {
-        $messsage = "La quantité doit être supérieur à 0";
+        $messsage = "La quantité doit être supérieur à 0.";
 
     } else {
         include_once("../include_files/db_connection.php");
 
-        $stmt = $db->prepare("UPDATE `BusinessSell` SET `business`=?,`typeItem`=?,`quantity`=?,`price`=? WHERE business = ? AND typeItem = ?");
+        $stmt = $db->prepare("UPDATE `BusinessBuy` SET `business`=?,`typeItem`=?,`quantity`=?,`price`=? WHERE business = ? AND typeItem = ?");
         $stmt->bind_param("iiiiii", $_SESSION["id"], $_POST["item_id"], $_POST["quantity"], $_POST["price"], $_SESSION["id"], $_POST["item_id"]);
         $stmt->execute();
 
-        $messsage = "Offre modifiée avec succès";
+        $messsage = "Recherche modifiée avec succès";
     }
 }
 ?>
@@ -37,7 +37,7 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des offres</title>
+    <title>Gestion des recherches</title>
     <link rel="stylesheet" href="../style/basic.css">
     <link rel="stylesheet" href="../style/form.css">
     <link rel="stylesheet" href="../style/manage_items.css">
@@ -48,10 +48,10 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
     echo "<div id='content'>";
     if(!isset($_GET["item_id"])) { 
 
-        echo "<h1>Vos offres</h1>";
+        echo "<h1>Vos recherches</h1>";
         include_once("../include_files/db_connection.php");
 
-        $stmt = $db->prepare("SELECT TypeItem.*, BusinessSell.* FROM BusinessSell LEFT JOIN TypeItem ON TypeItem.id = BusinessSell.typeItem WHERE BusinessSell.business = ?");
+        $stmt = $db->prepare("SELECT TypeItem.*, BusinessBuy.* FROM BusinessBuy LEFT JOIN TypeItem ON TypeItem.id = BusinessBuy.typeItem WHERE BusinessBuy.business = ?");
         $stmt->bind_param("i", $_SESSION["id"]);
         $stmt->execute();
 
@@ -81,7 +81,7 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
             echo "<td>" . $row["price"] . "€</td>";
             echo "<td>" . $row["quantity"] . "</td>";
             echo "<td>" . $row_sales["sales"] . "</td>";
-            echo "<td><a class='link'href='manage_items.php?item_id=" . $row["id"] . "'>Modifier</a>";
+            echo "<td><a class='link'href='manage_searches.php?item_id=" . $row["id"] . "'>Modifier</a>";
             echo "   <a class='link'href='../common/item_display.php?item=" . $row["id"] . "'>Voir dans le catalogue</a></td>";
             echo "</div>";
         }
@@ -90,12 +90,12 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
 
         echo "<a class='link' href='dashboard.php'>Retourner au tableau de bord</a>";
 
-        echo $messsage;
+        echo "<br><br>" . $messsage;
 
     } else if(isset($_GET["item_id"])) { 
         include_once("../include_files/db_connection.php");
 
-        $stmt = $db->prepare("SELECT TypeItem.*, BusinessSell.* FROM TypeItem JOIN BusinessSell ON TypeItem.id = BusinessSell.typeItem WHERE TypeItem.id = ? AND BusinessSell.business = ?");
+        $stmt = $db->prepare("SELECT TypeItem.*, BusinessBuy.* FROM TypeItem JOIN BusinessBuy ON TypeItem.id = BusinessBuy.typeItem WHERE TypeItem.id = ? AND BusinessBuy.business = ?");
         $stmt->bind_param("ii", $_GET["item_id"], $_SESSION["id"]);
         $stmt->execute();
 
@@ -103,8 +103,8 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
         $row = $result->fetch_assoc();
 
         echo "<div id='form-container'>";
-        echo "<form action='manage_items.php' method='post'>";
-        echo "<h1>Modifier votre offre</h1>";
+        echo "<form action='manage_searches.php' method='post'>";
+        echo "<h1>Modifier votre recherche</h1>";
 
         echo "<input type='hidden' name='item_id' value='" . $_GET["item_id"] . "'>";
 

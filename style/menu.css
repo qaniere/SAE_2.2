@@ -3,7 +3,7 @@ body {
 }
 
 nav {
-    height: 20vh;
+    height: 17vh;
     width: 100vw;
     margin-top: -16px;
 
@@ -11,14 +11,14 @@ nav {
     align-items: center;
 
     background-color: #7cb17d;
-    border-bottom: 3.5px solid black;
-    box-shadow: 0 5px 2px -2px gray;
+    border-bottom: 1.75px solid rgb(31, 27, 27);
+    box-shadow: 0 5px 8.5px gray;
 }
 
 
 #menu-logo {
-    height: 8em;
-    width: 8em;
+    height: 7.5em;
+    width: 7.5em;
 }
 
 #menu {

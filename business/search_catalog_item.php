@@ -28,16 +28,16 @@
         $result = $stmt ->get_result();
     }
 
-    if(isset($_POST["new_item_id"])) {
+    if (isset($_POST["new_item_id"])) {
 
         if ($_POST["price"] < 0) {
             $message = "<strong>Le prix doit être positif.</strong>";
-
-        } else {
             
+        } else {
+
             include_once("../include_files/db_connection.php");
 
-            $stmt = $db->prepare("INSERT INTO BusinessSell(business, typeItem, quantity, price) VALUES (?, ?, ?, ?)");
+            $stmt = $db->prepare("INSERT INTO BusinessBuy(business, typeItem, quantity, price) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("iiii", $id, $_POST["new_item_id"], $_POST["quantity"], $_POST["price"]);
             $stmt->execute();
 
@@ -51,7 +51,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un objet à vendre</title>
+    <title>Ajouter un objet à rechercher</title>
     <link rel="stylesheet" href="../style/basic.css">
     <link rel="stylesheet" href="../style/form.css">
 </head>
@@ -60,10 +60,10 @@
     if(!isset($_GET["add_item"])) {
     ?>
         <div id="form-container">
-            <form action="sell_catalog_item.php" method="post" enctype="multipart/form-data">
-                <h1 id="form-title">Ajouter objet du catalogue à vendre</h1>            
+            <form action="./search_catalog_item.php" method="post" enctype="multipart/form-data">
+                <h1 id="form-title">Ajouter objet du catalogue à rechercher</h1>            
                     <p>
-                        Cette page vous permet de vendre un produit qui est déjà présent dans le catalogue. 
+                        Cette page vous permet de chercher un produit qui est déjà présent dans le catalogue. 
                         Si votre objet n'est pas présent dans le catalogue, utilisez <a class="link" href="sell_new_item.php">cette page</a>
                     </p>
                     <div class="form-question">
@@ -78,12 +78,12 @@
                     <?php
                         
                         if(isset($_POST["item_name"])) {
-                            echo "<h2>Choisisez l'objet à vendre :</h2>";
+                            echo "<h2>Choisisez l'objet à trouver :</h2>";
 
                             while($row = $result->fetch_assoc()) {
                                 $id = $row["id"];
                                 $result_item_name = $row["name"]; 
-                                echo "<a class='link' href='sell_catalog_item.php?add_item=$id'><li>$result_item_name</a></li>";
+                                echo "<a class='link' href='search_catalog_item.php?add_item=$id'><li>$result_item_name</a></li>";
                             }
                         }
                         echo $message;
@@ -105,8 +105,8 @@
         $name = $row["name"];        
     ?>
         <div id="form-container">
-            <form action="sell_catalog_item.php" method="post">
-                <h1 id="form-title">Ajouter une offre pour "<?php echo $name;?>"</h1>              
+            <form action="search_catalog_item.php" method="post">
+                <h1 id="form-title">Ajouter une annonce pour "<?php echo $name;?>"</h1>              
                 <div class="form-question">
                     <label for="price"><strong>Prix</strong></label>
                     <br>
