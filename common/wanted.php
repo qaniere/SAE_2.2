@@ -9,17 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/catalog.css">
     <link href="../style/basic.css" rel="stylesheet">
-    <title>Catalogue de vente</title>
+    <title>Catalogue recherches d'entreprises</title>
 </head>
 <body>
     <?php include_once("../include_files/menu.php");?>
-    <h1>Catalogue de vente</h1>
-    <p>Des produits reconditionnés de qualité et à des prix défiant toute concurence.</p>
+    <h1>Les recherches des entreprises</h1>
+    <p>Nos partenaires redonnent une vie à vos vieux appareils.</p>
     <div class="container">
         <?php
             include_once("../include_files/db_connection.php");
 
-            $stmt = $db->prepare("SELECT *, TypeItem.name, BusinessSell.price FROM BusinessSell JOIN TypeItem ON BusinessSell.typeItem = TypeItem.id WHERE (typeItem, price) IN (SELECT typeItem, MIN(price) FROM BusinessSell WHERE BusinessSell.quantity > 0 GROUP BY typeItem);");
+            $stmt = $db->prepare("SELECT *, TypeItem.name, BusinessBuy.price FROM BusinessBuy JOIN TypeItem ON BusinessBuy.typeItem = TypeItem.id WHERE (typeItem, price) IN (SELECT typeItem, MIN(price) FROM BusinessBuy WHERE BusinessBuy.quantity > 0 GROUP BY typeItem);");
             $stmt -> execute();
             $result = $stmt->get_result();
 

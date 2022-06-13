@@ -57,9 +57,10 @@
 
         ?>
         <h2>Actions</h2>
-        <h3>Gèrer les offres</h3>
+        <h3>Gestion des annonces</h3>
         <ul>
-            <li><a class="link" href="../business/manage_items.php">Gérer les offres</a></li>
+            <li><a class="link" href="../business/manage_offers.php">Gérer les offres</a></li>
+            <li><a class="link" href="../business/manage_searches.php">Gérer les recherches</a></li>
         </ul>
         <h3>Vendre un objet</h3>
         <ul>
@@ -68,8 +69,8 @@
         </ul>
         <h3>Rechercher un objet</h3>
         <ul>
-            <li><a class="link" href="">Ajouter un produit recherché non présent dans le catalogue</a></li>
-            <li><a class="link" href="">Ajouter un produit à vendre déjà présent dans le catalogue</a></li>
+            <li><a class="link" href="./search_new_item.php">Ajouter un produit recherché non présent dans le catalogue</a></li>
+            <li><a class="link" href="./search_catalog_item.php">Ajouter un produit recherché déjà présent dans le catalogue</a></li>
         </ul>
     </div>
 </html>
