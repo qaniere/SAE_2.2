@@ -107,7 +107,7 @@ session_start();
         if($result->num_rows > 0) {
             $is_available_for_sale = true;
 
-            echo "<h2>Vendeurs</h2>";
+            echo "<h2>À vendre</h2>";
             echo "<ul>";
         
             while($row = $result -> fetch_assoc()) {
@@ -115,6 +115,35 @@ session_start();
                 $business = $row["BusinessName"];
                 $price = $row["price"];
                 echo "<li>$quantity articles proposés par $business à $price €</li>";
+
+                if($quantity > $max_quantity) {
+                    $max_quantity = $quantity;
+                }
+            }
+
+            echo "</ul>";
+        }
+
+        $stmt_buyers = $db->prepare("SELECT BusinessBuy.*, Business.name AS BusinessName FROM BusinessBuy LEFT JOIN Business ON BusinessBuy.business = Business.id WHERE BusinessBuy.typeItem = ? AND BusinessBuy.quantity > 0");
+        $stmt_buyers->bind_param("i", $id);
+        $stmt_buyers->execute();
+
+        $result = $stmt_buyers->get_result();
+
+        $max_quantity = 0;
+        $is_available_for_buy = false;
+
+        if($result->num_rows > 0) {
+            $is_available_for_buy = true;
+
+            echo "<h2>Recherchés</h2>";
+            echo "<ul>";
+        
+            while($row = $result -> fetch_assoc()) {
+                $quantity = $row["quantity"];
+                $business = $row["BusinessName"];
+                $price = $row["price"];
+                echo "<li>$quantity articles recherchés par $business à $price €</li>";
 
                 if($quantity > $max_quantity) {
                     $max_quantity = $quantity;
