@@ -29,7 +29,7 @@ session_start();
         //Check if the item exists
         $stmt = $db->prepare("SELECT id FROM TypeItem WHERE id = ?");
         $stmt->bind_param("i", $id);
-        $stmt->execute(array($id));
+        $stmt->execute();
 
         $row = $stmt->get_result()->fetch_assoc();
 
