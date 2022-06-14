@@ -27,15 +27,19 @@ session_start();
         include_once("../include_files/db_connection.php");
 
         //Check if the item exists
-        $exists = $db->query("SELECT typeItem FROM BusinessSell WHERE typeItem = $id AND quantity > 0;");
-        $row = $exists->fetch_assoc();
-        if (!isset($row["typeItem"])) {
+        $stmt = $db->prepare("SELECT id FROM TypeItem WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute(array($id));
+
+        $row = $stmt->get_result()->fetch_assoc();
+
+        if (!isset($row["id"])) {
             die("Cet article n'est pas en vente actuellement.<br><a class='link' href='./catalog.php'>Retourner au catalogue</a>");
         }
 
-    //Get the item's name, his price, the quantity available and the vendors
-        $stmt = $db -> prepare("SELECT TypeItem.name AS ItemName, TypeItem.file_extension, price, quantity, Business.name AS BusinessName FROM TypeItem,BusinessSell,Business WHERE TypeItem.id = ? AND TypeItem.id = typeItem AND Business.id = BusinessSell.business AND BusinessSell.quantity > 0;");
-        $stmt -> bind_param("i",$id);
+        //Get the item's name, his price, the quantity available and the vendors
+        $stmt = $db -> prepare("SELECT TypeItem.name AS ItemName, TypeItem.file_extension FROM TypeItem WHERE TypeItem.id = ?");
+        $stmt -> bind_param("i", $id);
         $stmt -> execute();
 
         $result = $stmt -> get_result();
@@ -43,9 +47,6 @@ session_start();
 
         $file_extension = $row["file_extension"];
         $name = $row["ItemName"];
-        $max_quantity = 0;
-        $quantity = $row["quantity"];
-        if ($quantity > $max_quantity) $max_quantity = $quantity; 
 
         //Item picture
         echo "<img id='item-picture' src='../catalog_pictures/" . $id . "." . $file_extension . "'>";
@@ -86,7 +87,6 @@ session_start();
         $result_extraction = $stmt_extraction -> get_result();
 
         while ($row_extraction = $result_extraction -> fetch_assoc()) {
-
             $element = $row_extraction["name"];
             $quantity = $row_extraction["quantity"];
 
@@ -95,54 +95,72 @@ session_start();
 
         echo "</ul>";
 
-        //Sellers
-        echo "<h2>Vendeurs</h2>";
-        echo "<ul>";
-        $business = $row["BusinessName"];
-        $price = $row["price"];
-        echo "<li>$quantity articles proposés par $business à $price €</li>";
-        
-        while($row = $result -> fetch_assoc()) {
-            $quantity = $row["quantity"];
-            $business = $row["BusinessName"];
-            $price = $row["price"];
-            echo "<li>$quantity articles proposés par $business à $price €</li>";
-        }
+        $stmt_vendors = $db->prepare("SELECT BusinessSell.*, Business.name AS BusinessName FROM BusinessSell LEFT JOIN Business ON BusinessSell.business = Business.id WHERE BusinessSell.typeItem = ? AND BusinessSell.quantity > 0");
+        $stmt_vendors->bind_param("i", $id);
+        $stmt_vendors->execute();
 
-        echo "</ul>";
+        $result = $stmt_vendors->get_result();
+
+        $max_quantity = 0;
+        $is_available_for_sale = false;
+
+        if($result->num_rows > 0) {
+            $is_available_for_sale = true;
+
+            echo "<h2>Vendeurs</h2>";
+            echo "<ul>";
+        
+            while($row = $result -> fetch_assoc()) {
+                $quantity = $row["quantity"];
+                $business = $row["BusinessName"];
+                $price = $row["price"];
+                echo "<li>$quantity articles proposés par $business à $price €</li>";
+
+                if($quantity > $max_quantity) {
+                    $max_quantity = $quantity;
+                }
+            }
+
+            echo "</ul>";
+        }
 
     ?>
 
     <!-- an form to order an item -->
     <br>
-    <form action="../customer/add_to_cart.php" method="POST">
-        <label for="">Nombre d'articles : </label>
-        <input type="number" value="1" min="1" max=<?=$max_quantity?> name="item-number">
-        <input type="hidden" name="productID" value=<?=$id?>>
-        <select name="" id="">
-            <?php
+    <?php
+    if($is_available_for_sale) {
+    ?>
+        <form action="../customer/add_to_cart.php" method="POST">
+            <label for="">Nombre d'articles : </label>
+            <input type="number" value="1" min="1" max=<?=$max_quantity?> name="item-number">
+            <input type="hidden" name="productID" value=<?=$id?>>
+            <select name="" id="">
+                <?php
+                    //Display the vendors in a dropdown list to let the user to choose
+                    $stmt = $db -> prepare("SELECT name FROM Business,BusinessSell WHERE BusinessSell.business = Business.id AND BusinessSell.typeItem = ? AND BusinessSell.quantity > 0;");
+                    $stmt -> bind_param("i",$id);
+                    $stmt -> execute();
+                    $result = $stmt -> get_result();
 
-                //Display the vendors in a dropdown list to let the user to choose
-                $stmt = $db -> prepare("SELECT name FROM Business,BusinessSell WHERE BusinessSell.business = Business.id AND BusinessSell.typeItem = ? AND BusinessSell.quantity > 0;");
-                $stmt -> bind_param("i",$id);
+                    while ($row = $result -> fetch_assoc()) {
+                        $business = $row["name"];
+                        echo "<option>$business</option>";
+                    }
+                ?>
+            </select>
+            <?php
+                $stmt = $db -> prepare("SELECT id AS businessID FROM Business WHERE name = ?");
+                $stmt -> bind_param("s",$business);
                 $stmt -> execute();
                 $result = $stmt -> get_result();
-
-                while ($row = $result -> fetch_assoc()) {
-                    $business = $row["name"];
-                    echo "<option>$business</option>";
-                }
+                $row = $result -> fetch_assoc();
             ?>
-        </select>
-        <?php
-            $stmt = $db -> prepare("SELECT id AS businessID FROM Business WHERE name = ?");
-            $stmt -> bind_param("s",$business);
-            $stmt -> execute();
-            $result = $stmt -> get_result();
-            $row = $result -> fetch_assoc();
-        ?>
-        <input type="hidden" name="businessID" value=<?=$row['businessID']?>>
-        <br>
-        <button type="submit">🛒 Ajouter au panier</button>
-    </div>
-</form>
+            <input type="hidden" name="businessID" value=<?=$row['businessID']?>>
+            <br>
+            <button type="submit">🛒 Ajouter au panier</button>
+        </div>
+        </form>
+    <?php
+    }
+    ?>
