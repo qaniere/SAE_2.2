@@ -8,10 +8,10 @@
             <a href="../index.php">Accueil</a>
         </div>
         <div class="menu-item" role="menuitem">
-            <a href="../common/catalog.php">Catalogue de vente</a>
+            <a href="../common/catalog.php">Acheter</a>
         </div>
         <div class="menu-item" role="menuitem">
-            <a href="../common/wanted.php">Recherches de nos partenaires</a>
+            <a href="../common/wanted.php">Vendre</a>
         </div>
         <?php 
         //$logout is a variable set on "disconnect.php" only. So, if the user
