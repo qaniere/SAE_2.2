@@ -50,7 +50,7 @@
                 echo "</ul>";
 
                 //Get all elements extracted by the customer
-                $stmt = $db ->prepare("SELECT name, quantity FROM Mendeleiev, CustomerExtraction WHERE Customer = ? AND Z = element");
+                $stmt = $db ->prepare("SELECT name, SUM(quantity) AS quantity FROM Mendeleiev, CustomerExtraction WHERE Customer = ? AND Z = element GROUP BY CustomerExtraction.element");
                 $stmt ->bind_param("i", $_SESSION["id"]);
                 $stmt ->execute();
 
