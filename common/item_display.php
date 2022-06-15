@@ -124,35 +124,6 @@ session_start();
             echo "</ul>";
         }
 
-        $stmt_buyers = $db->prepare("SELECT BusinessBuy.*, Business.name AS BusinessName FROM BusinessBuy LEFT JOIN Business ON BusinessBuy.business = Business.id WHERE BusinessBuy.typeItem = ? AND BusinessBuy.quantity > 0");
-        $stmt_buyers->bind_param("i", $id);
-        $stmt_buyers->execute();
-
-        $result = $stmt_buyers->get_result();
-
-        $max_quantity = 0;
-        $is_available_for_buy = false;
-
-        if($result->num_rows > 0) {
-            $is_available_for_buy = true;
-
-            echo "<h2>Recherchés</h2>";
-            echo "<ul>";
-        
-            while($row = $result -> fetch_assoc()) {
-                $quantity = $row["quantity"];
-                $business = $row["BusinessName"];
-                $price = $row["price"];
-                echo "<li>$quantity articles recherchés par $business à $price €</li>";
-
-                if($quantity > $max_quantity) {
-                    $max_quantity = $quantity;
-                }
-            }
-
-            echo "</ul>";
-        }
-
     ?>
 
     <!-- an form to order an item -->
@@ -167,7 +138,7 @@ session_start();
             <select name="" id="">
                 <?php
                     //Display the vendors in a dropdown list to let the user to choose
-                    $stmt = $db -> prepare("SELECT name FROM Business,BusinessSell WHERE BusinessSell.business = Business.id AND BusinessSell.typeItem = ? AND BusinessSell.quantity > 0;");
+                    $stmt = $db -> prepare("SELECT name FROM Business JOIN BusinessSell ON BusinessSell.business = Business.id AND BusinessSell.typeItem = ? AND BusinessSell.quantity > 0;");
                     $stmt -> bind_param("i",$id);
                     $stmt -> execute();
                     $result = $stmt -> get_result();
@@ -188,6 +159,67 @@ session_start();
             <input type="hidden" name="businessID" value=<?=$row['businessID']?>>
             <br>
             <button type="submit">🛒 Ajouter au panier</button>
+        </form>
+    <?php
+    }
+    $stmt_buyers = $db->prepare("SELECT BusinessBuy.*, Business.name AS BusinessName FROM BusinessBuy JOIN Business ON BusinessBuy.business = Business.id WHERE BusinessBuy.typeItem = ? AND BusinessBuy.quantity > 0");
+    $stmt_buyers->bind_param("i", $id);
+    $stmt_buyers->execute();
+
+    $result = $stmt_buyers->get_result();
+
+    $max_quantity = 0;
+    $is_available_for_buy = false;
+
+    if($result->num_rows > 0) {
+        $is_available_for_buy = true;
+
+        echo "<h2>Recherchés</h2>";
+        echo "<ul>";
+    
+        while($row = $result -> fetch_assoc()) {
+            $quantity = $row["quantity"];
+            $business = $row["BusinessName"];
+            $price = $row["price"];
+            echo "<li>$quantity articles recherchés par $business à $price €</li>";
+
+            if($quantity > $max_quantity) {
+                $max_quantity = $quantity;
+            }
+        }
+
+        echo "</ul>";
+    }
+    if($is_available_for_buy) {
+    ?>
+        <form action="../customer/sell.php" method="POST">
+            <label for="">Nombre d'articles : </label>
+            <input type="number" value="1" min="1" max=<?=$max_quantity?> name="item-number">
+            <input type="hidden" name="productID" value=<?=$id?>>
+            <select name="" id="">
+                <?php
+                    //Display the vendors in a dropdown list to let the user to choose
+                    $stmt = $db -> prepare("SELECT name FROM Business, BusinessBuy WHERE BusinessBuy.business = Business.id AND BusinessBuy.typeItem = ? AND BusinessBuy.quantity > 0;");
+                    $stmt -> bind_param("i",$id);
+                    $stmt -> execute();
+                    $result = $stmt -> get_result();
+
+                    while ($row = $result -> fetch_assoc()) {
+                        $business = $row["name"];
+                        echo "<option>$business</option>";
+                    }
+                ?>
+            </select>
+            <?php
+                $stmt = $db -> prepare("SELECT id AS businessID FROM Business WHERE name = ?");
+                $stmt -> bind_param("s",$business);
+                $stmt -> execute();
+                $result = $stmt -> get_result();
+                $row = $result -> fetch_assoc();
+            ?>
+            <input type="hidden" name="businessID" value=<?=$row['businessID']?>>
+            <br>
+            <button type="submit">💵​ Vendre à cette entreprise</button>
         </div>
         </form>
     <?php
