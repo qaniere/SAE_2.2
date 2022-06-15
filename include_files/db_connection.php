@@ -1,7 +1,15 @@
 <?php 
 
-    $file = fopen(stream_resolve_include_path("../.env"), "r"); 
-    //stream_resolve_include_path find the good path for .env file
+    if(isset($is_index)) {
+        $file = fopen(stream_resolve_include_path(".env"), "r"); 
+        //stream_resolve_include_path find the good path for .env file
+    
+    } else {
+        $file = fopen(stream_resolve_include_path("../.env"), "r");
+    }
+
+   
+   
 
     if($file == false) { 
     //If a error occurs during the opening of the file

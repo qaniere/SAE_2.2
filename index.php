@@ -44,46 +44,36 @@
         </div>
     </div>
     <div id="content">
-        <div id="presentation-block">
-            <h2>Qui sommes nous ?</h2>
-            <p>
-                Lyft hell of humblebrag organic shaman authentic, 
-                selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-                Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-                gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-                four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-                book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-                kinfolk slow-carb migas cold-pressed ennui.
-                <br>          
-                <div class="button-container">
+        <div class="presentation-block">
+            <h2 class="presentation-title">Qui sommes nous ?</h2>
+            <p class="presentation-text">
+                Nous sommes une jeune une start-up française qui met en relation des particuliers et des entreprises.
+
+                Notre but est de permettre aux particuliers de trouver des entreprises qui rachètent leurs appareils
+                électroniques afin d'en recycler les composants. Ces mêmes entreprises peuvent alors revendre des appareils 
+                électroniques fabriqué avec les matériaux recylés aux particuliers, dans une démarche d'économie circulaire
+                <br>       
+            </p>
+            <img class="presentation-image" src="./img/green-economy.png"> 
+            <div class="button-container">
                     <a href="./common/catalog.php"><button>Voir notre catalogue</button></a>
-                </div>
-            </p>
+            </div>
         </div>
-        <div id="presentation-block">
-            <h2>Comment ça marche ?</h2>
-            <p>
-                Lyft hell of humblebrag organic shaman authentic, 
-                selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-                Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-                gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-                four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-                book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-                kinfolk slow-carb migas cold-pressed ennui.
-            </p>
+        <div class="working-container">
+            <img id="working-img" src="./img/working.jpg">
         </div>
         <h3>Des offres pour les particuliers mais aussi pour les entreprises !</h3>
         <div id="customer-block-container">
             <div class="customer-block">
                 <p>
                     <h3>Vous êtes un particulier</h3>
-                    Lyft hell of humblebrag organic shaman authentic, 
-                    selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-                    Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-                    gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-                    four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-                    book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-                    kinfolk slow-carb migas cold-pressed ennui.
+                    <ul>
+                        <li>Vendez vos appareils électroniques</li>
+                        <li>Recevez des bon d'achat sous forme de cagnotte</li>
+                        <li>Achetez des appareils électroniques grâce à cette cagnotte</li>
+                        <li>Faites des économies</li>
+                        <li>Faite fonctionner l'économie circulaire !</li>
+                    </ul>
                     <br>
                     <div class="button-container">
                         <a href="./customer/register.php"><button>S'inscrire</button></a>
@@ -94,13 +84,13 @@
             <div class="customer-block">
                 <p>
                     <h3>Vous êtes une entreprise</h3>
-                    Lyft hell of humblebrag organic shaman authentic, 
-                    selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-                    Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-                    gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-                    four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-                    book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-                    kinfolk slow-carb migas cold-pressed ennui.
+                    <ul>
+                        <li>Rachetez des appareils électroniques à des clients</li>
+                        <li>Récuperez des composants électroniques</li>
+                        <li>Refaites des appareils électroniques avec les composants récupérés</li>
+                        <li>Revendez les</li>
+                        <li>Faite fonctionner l'économie circulaire !</li>
+                    </ul>
                     <br>
                     <div class="button-container">
                         <a href="./business/register.php"><button>S'inscrire</button> </a>
@@ -109,17 +99,50 @@
                 </p>
             </div>
         </div>  
-        <div id="presentation-block">
-            <h2>Coff-IT c'est...</h2>
-            <p>
-                Lyft hell of humblebrag organic shaman authentic, 
-                selvage vegan thundercats meh cloud bread poutine pop-up gentrify bushwick. 
-                Pinterest vegan yes plz irony vape hoodie blog hexagon gentrify four loko. Authentic 
-                gastropub enamel pin fanny pack banjo artisan succulents. Gastropub gentrify kickstarter, 
-                four loko heirloom authentic disrupt small batch +1. Pok pok stumptown pug meditation coloring 
-                book tattooed twee aesthetic banh mi helvetica. Hella meggings neutra affogato, direct trade prism 
-                kinfolk slow-carb migas cold-pressed ennui.
-            </p>
+        <div class="presentation-block">
+            <h2 class="presentation-title">Coff-IT c'est...</h2>
+            <?php
+                $is_index = true;
+                include_once("./include_files/db_connection.php");
+
+                $stmt = $db->prepare("SELECT * FROM CustomerOrder");
+                $stmt->execute();
+
+                $orders = $stmt->get_result()->num_rows;
+
+                $stmt = $db->prepare("SELECT * FROM Customer");
+                $stmt->execute();
+
+                $customers = $stmt->get_result()->num_rows;
+
+                $stmt = $db->prepare("SELECT * FROM BusinessSell");
+                $stmt->execute();
+
+                $sales = $stmt->get_result()->num_rows;
+
+                $stmt = $db->prepare("SELECT * FROM BusinessBuy");
+                $stmt->execute();
+
+                $buy = $stmt->get_result()->num_rows;
+            ?>
+            <div class="numbers">
+                <div class="number-container">
+                    <span class="number"><?php echo $orders ?></span>
+                    <span class="description">Commandes</span>
+                </div>
+                <div class="number-container">
+                    <span class="number"><?php echo $customers ?></span>
+                    <span class="description">Clients</span>
+                </div>
+                <div class="number-container">
+                    <span class="number"><?php echo $sales ?></span>
+                    <span class="description">Objets à vendre</span>
+                </div>
+                <div class="number-container">
+                    <span class="number"><?php echo $buy ?></span>
+                    <span class="description">Objets recherchés</span>
+                </div>
+            </div>
         </div>     
     </div>
     <script src="./scripts/index.js"></script>

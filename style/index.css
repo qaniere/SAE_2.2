@@ -160,21 +160,6 @@ a:hover {
     justify-content: center;
 }
 
-#presentation-block {
-    width: 80vw;
-    padding: 1em;
-    padding-bottom: 3.5em;
-    margin-bottom: 5vh;
-    border-radius: 2px;
-    box-shadow: 3px 3px 2px rgb(198, 195, 190);
-
-    background-color: #7cb17d;
-}
-
-#presentation-block > p {
-    margin-bottom: 0;
-}
-
 #customer-block-container {
     display: flex;
     justify-content: space-evenly;
@@ -184,29 +169,89 @@ a:hover {
     margin-bottom: 5vh;
 }
 
+#working-img {
+    height: 30em;
+}
+
 
 .customer-block {
     width: 40vw;
     padding-right: 1em;
     padding-left: 1em;
+
     border-radius: 2px;
-    padding-bottom: 3.5em;
     box-shadow: 3px 3px 2px rgb(198, 195, 190);
     background-color: #7cb17d;
 }
 
-.customer-block > button {
-    margin-top: 2vh;
-}
 
 .button-container {
-    margin-top: 5px;
-    position: absolute;
+    margin-bottom: 0;
+    width: 100%;
 
     display: flex;
     justify-content: flex-start;
 }
 
+.presentation-block {
+    width: 70vw;
+    padding: 1em;
+    margin-bottom: 5vh;
+
+    border-radius: 2px;
+    box-shadow: 3px 3px 2px rgb(198, 195, 190);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    background-color: #7cb17d;
+}
+
+.presentation-text {
+    width: 40vw;
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+.presentation-image {
+    width: 10%;
+    padding: 2em;
+    margin-left: 47%;
+    margin-top: 2%;
+    position: absolute;
+
+    border-radius: 50%;
+    background-color: #59965b;
+}
+
+.presentation-title {
+    width: 100%;
+    text-align: left;
+}
+
+.numbers {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.number-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100px;
+}
+
+.number {
+    width: 100%;
+    font-size: 4em;
+    text-align: center;
+}
+
+.description {
+    width: 100%;
+    text-align: center;
+}
 
 
 @keyframes jumping {
@@ -273,4 +318,24 @@ a:hover {
         width: 80vw;
         margin-bottom: 5vh;
     }  
+
+    .presentation-title {
+        font-size: 2em;
+    }
+
+    .presentation-text {
+        width: 100%;
+    }
+
+    .presentation-image {
+        display: none;
+    }
+
+    #working-img {
+        height: 20em;
+    }
+
+    .numbers {
+        flex-wrap: wrap;
+    }
 }
