@@ -53,13 +53,22 @@
                 $stmt = $db ->prepare("SELECT name, SUM(quantity) AS quantity FROM Mendeleiev, CustomerExtraction WHERE Customer = ? AND Z = element GROUP BY CustomerExtraction.element");
                 $stmt ->bind_param("i", $_SESSION["id"]);
                 $stmt ->execute();
-
+  
                 $result = $stmt -> get_result();
+                if($result->num_rows > 0) {
+                    echo "<h2>Les éléments que vous avez recyclés</h2>";
+                    
+                }
+
+                echo "<ul>";
+
                 while ($row = $result -> fetch_assoc()) {
                     $element = $row["name"];
                     $quantity = $row["quantity"];
-                    echo "$element : $quantity<br>";
+                    echo "<li>$element : $quantity<br></li>";
                 }
+
+                echo "</ul>";
 
                 //Get number of order of the customer
                 $stmt = $db -> prepare("SELECT COUNT(id) AS OrderCount FROM CustomerOrder WHERE CustomerID = ?");
