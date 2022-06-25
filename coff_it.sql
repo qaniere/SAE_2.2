@@ -13,7 +13,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Business` (
-  `id` int(11) NOT NULL,
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `email` varchar(200) NOT NULL,
   `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `BusinessSell` (
 
 
 CREATE TABLE `Customer` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `login` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stash` smallint(6) NOT NULL COMMENT 'no more than 65000 euros'
@@ -102,7 +102,7 @@ INSERT INTO `Mendeleiev` (`Z`, `symbol`, `name`) VALUES
 
 
 CREATE TABLE `TypeItem` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `file_extension` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
