@@ -58,7 +58,7 @@
                 foreach($extraction_lines as $line) {
 
                     $extraction_array = explode("=", $line);
-                    if(sizeof($extraction_array) != 2) {
+                    if(sizeof($extraction_array) != 2 || !is_numeric($extraction_array[1])) {
                         $extraction_syntax_error = true;
                         break;
                     }
@@ -84,12 +84,21 @@
 
                 } else if ($element_no_found) {
                     $message = "<strong>Un des matériaux n'a pas été trouvé dans la base de données !</strong>";
+                
+                } else if(!is_numeric($price)) {
+                    $message = "<strong>Le prix n'est pas un nombre valide.</strong>";
+
+                } else if(!is_numeric($quantity)) {
+                    $message = "<strong>La quantité n'est pas un nombre valide.</strong>";
 
                 } else {
 
                     //Get the file exentension of the image
                     $array = explode(".", $_FILES["image"]["name"]);
                     $file_extension = end($array);
+
+                    $item_name = filter_var($item_name, FILTER_SANITIZE_STRING);
+                    $file_extension = filter_var($file_extension, FILTER_SANITIZE_STRING);
 
                     //Insert the name in the first table and get an item id from the databse
                     $stmt = $db->prepare("INSERT INTO TypeItem (name, file_extension) VALUES (?, ?)");
@@ -103,6 +112,9 @@
 
                     foreach($specs_lines as $line) {
                         $specs_array = explode("=", $line);
+                        $specs_array[0] = filter_var($specs_array[0], FILTER_SANITIZE_STRING);
+                        $specs_array[1] = filter_var($specs_array[1], FILTER_SANITIZE_STRING);
+                        
                         $stmt->bind_param("iss", $item_id, $specs_array[0], $specs_array[1]);
                         $stmt->execute();
                     }

@@ -19,6 +19,9 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
 
     } else if($_POST["quantity"] <= 0) {
         $messsage = "La quantité doit être supérieur à 0";
+    
+    } else if(!is_numeric($_POST["price"]) || !is_numeric($_POST["quantity"])) {
+        $messsage = "Nombre non valide";
 
     } else {
         include_once("../include_files/db_connection.php");
@@ -90,7 +93,7 @@ if(isset($_POST["item_id"]) && isset($_POST["price"]) && isset($_POST["quantity"
 
         echo "<a class='link' href='dashboard.php'>Retourner au tableau de bord</a>";
 
-        echo $messsage;
+        echo "<br><br><strong>" . $messsage . "</strong>";
 
     } else if(isset($_GET["item_id"])) { 
         include_once("../include_files/db_connection.php");

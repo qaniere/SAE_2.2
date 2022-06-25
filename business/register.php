@@ -37,16 +37,21 @@
 
             } else {
 
+                $mail_sanitized = filter_var($mail, FILTER_SANITIZE_STRING);
+                $business_name_sanitized = filter_var($business_name, FILTER_SANITIZE_STRING);
+                $country_sanitized = filter_var($country, FILTER_SANITIZE_STRING);
+                //transform "<script>alert("bouh !");</script>" into "alert("bouh !");"
+
                 $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
                 $stmt = $db ->prepare("INSERT INTO Business (email, name, country, password_hash) VALUES (?, ?, ?, ?)");
-                $stmt ->bind_param("ssss", $mail, $business_name, $country, $password_hashed);
+                $stmt ->bind_param("ssss", $mail_sanitized, $business_name_sanitized, $country_sanitized, $password_hashed);
                 $stmt ->execute();
                 
                 $_SESSION["id"] = $db ->insert_id;
                 $_SESSION["account_type"] = "business";
-                $_SESSION["name"] = $business_name;
-                $_SESSION["mail"] = $mail;
+                $_SESSION["name"] = $business_name_sanitized;
+                $_SESSION["mail"] = $mail_sanitized;
                 $_SESSION["country"] = $country;
 
                 header("Location: " ."dashboard.php");

@@ -77,7 +77,7 @@ session_start();
         echo "</ul>";
 
         echo "<h2>Matériaux précieux contenus dans cet objet</h2>";
-        echo "<span>En achetant cet objet, vous empechez ces matériaux précieux de partir à la poubelle :</span>";
+        echo "<span>En achetant / vendant cet objet, vous empechez ces matériaux précieux de partir à la poubelle :</span>";
         echo "<ul>";
 
         $stmt_extraction = $db -> prepare("SELECT * FROM ExtractionFromTypeItem LEFT JOIN Mendeleiev ON ExtractionFromTypeItem.element = Mendeleiev.Z WHERE ExtractionFromTypeItem.typeItem = ?");
