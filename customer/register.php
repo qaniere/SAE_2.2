@@ -39,6 +39,11 @@
 
                 $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
+                $login = filter_var($login, FILTER_SANITIZE_STRING);
+                $surname = filter_var($surname, FILTER_SANITIZE_STRING);
+                $firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
+                $mail = filter_var($mail, FILTER_SANITIZE_STRING);
+
                 $stmt = $db ->prepare("INSERT INTO Customer (login, password_hash, stash) VALUES (?, ?, 0)");
                 $stmt ->bind_param("ss", $login, $password_hashed);
                 $stmt ->execute();
