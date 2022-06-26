@@ -45,7 +45,7 @@
                 echo "<h2>Vos informations</h2>";
                 echo "<ul>";
                 echo "<li><strong>Login :</strong> $login</li>";
-                echo "<li><strong>Cagnotte fidelité :</strong> $stash</li>";
+                echo "<li><strong>Cagnotte fidelité :</strong> $stash €</li>";
                 echo "<li><strong>Adresse email :</strong> $email</li>";
                 echo "</ul>";
 
@@ -65,7 +65,7 @@
                 while ($row = $result -> fetch_assoc()) {
                     $element = $row["name"];
                     $quantity = $row["quantity"];
-                    echo "<li>$element : $quantity<br></li>";
+                    echo "<li>$element : $quantity mg<br></li>";
                 }
 
                 echo "</ul>";
