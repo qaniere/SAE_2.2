@@ -59,7 +59,7 @@
                 foreach($extraction_lines as $line) {
 
                     $extraction_array = explode("=", $line);
-                    if(sizeof($extraction_array) != 2 || !is_numeric($extraction_array[1])) {
+                    if(sizeof($extraction_array) != 2) {
                         $extraction_syntax_error = true;
                         break;
                     }
