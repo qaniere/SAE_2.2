@@ -115,7 +115,7 @@
                 echo "<th>Date et heure de la commande</th>";
                 echo "</tr>";
 
-                $stmt = $db->prepare("SELECT CustomerOrder.id AS OrderID, TypeItem.id AS id, TypeItem.name AS itemName, TypeItem.file_extension AS file_extension, Business.name AS businessName, CustomerOrder.quantity, price, CustomerOrder.date FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ? LIMIT 3 OFFSET ?");
+                $stmt = $db->prepare("SELECT CustomerOrder.id AS OrderID, TypeItem.id AS id, TypeItem.name AS itemName, TypeItem.file_extension AS file_extension, Business.name AS businessName, CustomerOrder.quantity, price, CustomerOrder.date FROM CustomerOrder JOIN BusinessSell ON CustomerOrder.businessID = BusinessSell.business AND CustomerOrder.itemID = BusinessSell.typeItem JOIN Business ON CustomerOrder.businessID = Business.id JOIN TypeItem ON CustomerOrder.itemID = TypeItem.id WHERE CustomerID = ? ORDER BY CustomerOrder.date ASC LIMIT 3 OFFSET ? ");
                 $stmt->bind_param("ii", $_SESSION["id"], $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
